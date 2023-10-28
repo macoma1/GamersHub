@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/portfolio-videogames",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "src/ndex.html"
+      }
+    ]
+  }
+}

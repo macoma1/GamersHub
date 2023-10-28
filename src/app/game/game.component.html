@@ -1,0 +1,19 @@
+<div *ngIf="games.length > 0; else noGames">
+    <div *ngFor="let game of games">
+      <h3>{{ game.name }}</h3>
+      <img [src]="game.background_image" alt="{{ game.name }}" width="200" />
+      <p>{{ game.metacritic }}</p>
+      <ul>
+        <li *ngFor="let platform of game.platforms"> {{ platform.platform.name }}</li>
+      </ul>
+      <ul>
+        <li *ngFor="let genre of game.genres"> {{ genre.name }}</li>
+      </ul>
+      <p>{{ game.released }}</p>
+    </div>
+  </div>
+  
+  <ng-template #noGames>
+    <p>There are no games available at this time.</p>
+  </ng-template>
+  
