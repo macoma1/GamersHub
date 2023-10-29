@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GameResponse } from './game/game.model';
+import { GameResponse } from '../app/game/game.model';
 import { Observable } from 'rxjs';
 
 

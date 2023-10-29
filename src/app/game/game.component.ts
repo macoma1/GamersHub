@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { VideogamesService } from '../videogames.service';
+import { VideogamesService } from '../../services/videogames.service';
 import { Game } from './game.model';
 
 
