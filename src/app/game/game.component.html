@@ -1,6 +1,6 @@
 <div *ngIf="games.length > 0; else noGames">
-  <div class="game-grid"> <!-- Aquí usamos el diseño de grilla -->
-      <div *ngFor="let game of games" class="game-card"> <!-- Cada juego es una tarjeta dentro de la grilla -->
+  <div class="game-grid">
+      <div *ngFor="let game of games" class="game-card">
           <img [src]="game.background_image" alt="{{ game.name }}" />
           <div class="game-info">
               <h3>{{ game.name }}</h3>
@@ -18,5 +18,4 @@
 </div>
 
 <ng-template #noGames>
-  <p>There are no games available at this time.</p>
 </ng-template>

@@ -1,6 +1,10 @@
 <div class="background">
-    <button routerLink="/" routerLinkActive="active">Inicio</button>
-    <button routerLink="/login" routerLinkActive="active">Login</button>
-    <button routerLink="/register" routerLinkActive="active">Registro</button>
-    <router-outlet></router-outlet>
+    <nav>
+        <button routerLink="/" routerLinkActive="active">Inicio</button>
+        <button routerLink="/login" routerLinkActive="active">Login</button>
+        <button routerLink="/register" routerLinkActive="active">Registro</button>
+    </nav>
+    <section>
+        <router-outlet></router-outlet>
+    </section>
 </div>

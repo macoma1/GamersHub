@@ -1,0 +1,87 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+body {
+  background-color: #000;
+  font-family: "Arial", sans-serif; /* Cambia esto si prefieres otra fuente. */
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Ahora solo 2 tarjetas por fila. */
+  gap: 20px;
+  padding: 20px;
+}
+
+.game-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+  border-radius: 0; /* Borde redondo eliminado */
+  transition: transform 0.3s;
+}
+.game-card > * {
+  margin-top: 0;
+}
+
+.game-card:hover {
+  transform: scale(
+    1.05
+  ); /* Un ligero efecto de zoom al pasar el ratón sobre la tarjeta. */
+}
+
+.game-card img {
+  width: 100%;
+  margin: 0%;
+  padding: 0%;
+  height: auto;
+  transition: opacity 0.3s;
+}
+
+.game-card:hover img {
+  opacity: 0.7; /* Atenuamos la imagen al pasar el ratón sobre la tarjeta. */
+}
+
+.game-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+  color: #fff;
+  border-radius: 0; /* Borde redondo eliminado */
+}
+
+.game-info h3 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.game-info p {
+  margin-top: 5px;
+}
+
+/* Para mostrar la fecha de lanzamiento en la esquina inferior derecha */
+.game-info p:last-child {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  margin: 0;
+}
+
+.game-info ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.game-info li {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
