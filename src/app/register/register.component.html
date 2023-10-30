@@ -1,6 +1,19 @@
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="username" placeholder="Username">
-    <input type="password" formControlName="password" placeholder="Password">
-    <input type="text" formControlName="email" placeholder="Email">
+    <h3>Register Here</h3>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="Username" id="username" formControlName="username">
+
+    <label for="password-register">Password</label>
+    <input type="password" placeholder="Password" id="password-register" formControlName="password">
+
+    <label for="email-register">Email</label>
+    <input type="text" placeholder="Email" id="email-register" formControlName="email">
+
     <button type="submit">Register</button>
 </form>

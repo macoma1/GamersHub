@@ -1,5 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-/* styles.css o el archivo de estilos de tu componente */
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0%;
+  padding: 0%;
+  background-color: #121212;
+}
+
 .game-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
