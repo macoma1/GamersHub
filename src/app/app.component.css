@@ -3,40 +3,34 @@
     height: 100%;
     background-color: #121212;
     position: relative;
-    padding-top: 20px;
 }
 
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    margin-right: 20px;
+    justify-content: flex-end;    
+    background-color: rgba(68, 68, 68);
 }
 
 nav button {
-    margin-left: 10px;
     width: 100%;
-    max-width: 200px;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 5px;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
+    max-width: 180px;
+    background-color: rgba(68, 68, 68);
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
     text-align: center;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: none;
 }
 
 nav button:first-child {
     margin-left: 0;
 }
 
-nav button:hover {
-    transform: scale(1.05);
-}
+
 
 section {
     margin-top: 60px;

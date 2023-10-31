@@ -11,17 +11,24 @@ export interface Game {
     released: Date;
     background_image: string;
     metacritic: number;
-    ratings_count: number;
+    rating: number;
+    added_by_status : AddedStatus;
     platforms: GamePlatform[];
     genres: GameGenre[];
 }
 
+interface AddedStatus {
+    beaten: number;
+    dropped: number;
+    owned: number;
+    playing: number;
+}
 interface PlatformDetail {
     id: number;
     name: string;
 }
 
-interface GamePlatform {
+export interface GamePlatform {
     platform: PlatformDetail;
 }
 

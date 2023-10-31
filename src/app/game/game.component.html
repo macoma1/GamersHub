@@ -1,26 +1,45 @@
-<div *ngIf="games.length > 0; else noGames">
-    <div class="game-grid">
-        <div *ngFor="let game of games" class="game-card">
-            <img [src]="game.background_image" alt="{{ game.name }}" />
-            <div class="game-info">
-                <h3>{{ game.name }}</h3>
-                <p>{{ game.metacritic }}</p>
-                <ul>
-                    <li *ngFor="let platform of game.platforms"> {{ platform.platform.name }}</li>
-                </ul>
-                <ul>
-                    <li *ngFor="let genre of game.genres"> {{ genre.name }}</li>
-                </ul>
-                <p>{{ game.released }}</p>
-            </div>
-        </div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+<div class="search-bar">
+    <div class="input-group">
+        <input type="text" [(ngModel)]="query" placeholder="Search Game..." (keyup.enter)="search()">
+        <button (click)="search()">Search</button>
     </div>
 </div>
 
+
+<div *ngIf="games.length > 0; else noGames" class="game-grid" [class.search-mode]="isSearching">
+    <div *ngFor="let game of games" class="game-card" [class.search-mode]="isSearching">
+        <img [src]="game.background_image" alt="{{ game.name }}" />
+        <div class="game-info">
+            <h3>{{ game.name }}</h3>
+            <div class="stars">
+                <i *ngFor="let _ of getFullStars(game.rating)" class="bi bi-star-fill"></i>
+                <i *ngIf="hasHalfStar(game.rating)" class="bi bi-star-half"></i>
+                <i *ngFor="let _ of remainingStars(game.rating)" class="bi bi-star"></i>
+            </div>
+            <ul class="platform-icons">
+                <li *ngFor="let platform of filterSupportedPlatforms(game.platforms)">
+                    <i [class]="getPlatformGroup(platform.platform.name).icon"></i>
+                </li>
+            </ul>
+
+            <ul>
+                <li *ngFor="let genre of game.genres">{{ genre.name }}</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="games.length > 0; else noGames" class="game-grid" [class.search-mode]="isSearching" appInfiniteScroll
+    (scrollToEnd)="loadMoreGamesFromService()">
+</div>
+
 <ng-template #noGames>
+    <p>No games found</p>
 </ng-template>
-<nav class="pagination-nav">
+<nav class="pagination-nav" *ngIf="!isSearching">
     <button class="page-btn" (click)="previousPage(); scrollToTop()" [disabled]="currentPage === 1">Anterior</button>
     <span class="page-info">{{currentPage}} - {{totalPages}}</span>
-    <button class="page-btn" (click)="nextPage(); scrollToTop()" [disabled]="currentPage === totalPages">Siguiente</button>
+    <button class="page-btn" (click)="nextPage(); scrollToTop()"
+        [disabled]="currentPage === totalPages">Siguiente</button>
 </nav>
