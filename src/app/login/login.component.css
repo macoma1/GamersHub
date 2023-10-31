@@ -5,6 +5,19 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #e5e5e5 !important;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0 50px rgba(255,255,255,0.07) inset;
+}
+
 .background{
     background-color: #121212;
     width: 430px;

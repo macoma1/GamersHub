@@ -11,16 +11,43 @@ import { Game } from './game.model';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent {
+  games: Game[] = [];
+  totalPages: number = 0;
+  currentPage: number = 1;
+
   constructor(private videogamesService: VideogamesService) { } 
 
-  games: Game[] = [];
-  
-  
   ngOnInit(): void {
-    this.videogamesService.getGames().subscribe(data => {
+    this.loadGames();
+  }
+
+  loadGames(): void {
+    this.videogamesService.getGames(this.currentPage).subscribe(data => {
       this.games = data.results;
+      this.totalPages = Math.ceil(data.count / 10);
     });
   }
 
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadGames();
+    }
+  }
 
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadGames();
+    }
+  }
+  scrollToTop(): void {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+  
 }
+

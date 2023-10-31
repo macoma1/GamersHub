@@ -14,9 +14,6 @@ import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent,
-    RegisterComponent,
-    LoginComponent,
     HomeComponent
   ],
   imports: [
