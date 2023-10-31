@@ -14,7 +14,7 @@ export class VideogamesService {
   private baseUrl = 'https://api.rawg.io/api/games';
   private pageSize = 24;
 
-  getGames(page: number = 1): Observable<GameResponse> {
+  getGames(page: number): Observable<any> {
     const url = `${this.baseUrl}?key=${this.apiKey}&page_size=${this.pageSize}&page=${page}`;
     return this.http.get<GameResponse>(url);
   }

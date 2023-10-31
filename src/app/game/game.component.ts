@@ -94,173 +94,95 @@ export class GameComponent implements OnInit {
     });
   }
 
+  search() {
+    if (this.query.trim() === '') {
+      this.isSearching = false;
+      this.loadGames();
+      return;
+    } else {
+      this.isSearching = true;
+    }
 
+    this.videogamesService.searchGames(this.query).subscribe(response => {
+      let games = response.results;
 
-// search() {
-//   if (this.query.trim() === '') {
-//     this.isSearching = false;
-//     this.loadGames();
-//     return;
-//   } else {
-//     this.isSearching = true;
-//   }
+      console.log("Resultados iniciales:", games); // Verificar que 'Cyberpunk' está en estos resultados
 
-//   let allGames: GameType[] = [];
-//   const fetchGames = (page = 1) => {
-//     // Asegúrate de que tu servicio "videogamesService.searchGames" puede aceptar el parámetro "page"
-//     this.videogamesService.searchGames(this.query, { page }).subscribe(response => {
-//       if (response.results && response.results.length > 0) {
-//         allGames = [...allGames, ...response.results];
+      games = games.filter(game => game.name.toLowerCase().includes(this.query.toLowerCase()));
+      console.log("Después del filtrado de nombre:", games);
+      games = games.filter(game =>
+        game.rating !== null &&
+        game.platforms && game.platforms.length > 0 &&
+        // game.genres && game.genres.length > 0 &&
+        game.released
+      );
+      console.log("Después de los filtros adicionales:", games);
 
-//         // Si hay más juegos, sigue paginando
-//         if (response.next) {
-//           fetchGames(page + 1);
-//         } else {
-//           // Procesa todos los juegos después de obtenerlos
-//           processGames(allGames);
-//         }
-//       } else {
-//         processGames(allGames);
-//       }
-//     });
-//   };
+      // Ordenación
+      games.sort((a, b) => {
+        const ownedA = a.added_by_status && a.added_by_status.owned ? a.added_by_status.owned : 0;
+        const ownedB = b.added_by_status && b.added_by_status.owned ? b.added_by_status.owned : 0;
 
-//   const processGames = (games: GameType[]) => {
-//     console.log("Resultados iniciales:", games);
+        if (ownedA !== ownedB) {
+          return ownedB - ownedA;
+        }
 
-//     // Filtrado
-//     games = games.filter((game: GameType) => game.name.toLowerCase().includes(this.query.toLowerCase()));
-//     console.log("Después del filtrado de nombre:", games);
+        if (a.rating !== b.rating) {
+          return b.rating - a.rating;
+        }
 
-//     // Filtros adicionales
-//     games = games.filter((game: GameType) =>
-//       game.rating !== null &&
-//       game.rating > 2 &&
-//       game.platforms && game.platforms.length > 0 &&
-//       game.genres && game.genres.length > 0 &&
-//       game.released
-//     );
-//     console.log("Después de los filtros adicionales:", games);
+        const dateA = new Date(a.released);
+        const dateB = new Date(b.released);
+        return dateB.getTime() - dateA.getTime();
+      });
 
-//     // Ordenación
-//     games.sort((a: GameType, b: GameType) => {
-//       const ownedA = a.added_by_status && a.added_by_status.owned ? a.added_by_status.owned : 0;
-//       const ownedB = b.added_by_status && b.added_by_status.owned ? b.added_by_status.owned : 0;
-
-//       if (ownedA !== ownedB) {
-//         return ownedB - ownedA;
-//       }
-
-//       if (a.rating !== b.rating) {
-//         return b.rating - a.rating;
-//       }
-
-//       const dateA = new Date(a.released);
-//       const dateB = new Date(b.released);
-//       return dateB.getTime() - dateA.getTime();
-//     });
-
-//     this.games = games;
-//   };
-
-//   fetchGames();
-// }
-
-
-
-search() {
-  if (this.query.trim() === '') {
-    this.isSearching = false;
-    this.loadGames();
-    return;
-  } else {
-    this.isSearching = true;
-  }
-
-  this.videogamesService.searchGames(this.query).subscribe(response => {
-    let games = response.results;
-
-    console.log("Resultados iniciales:", games); // Verificar que 'Cyberpunk' está en estos resultados
-
-    // Filtrado para que contenga el término de búsqueda en el nombre
-    games = games.filter(game => game.name.toLowerCase().includes(this.query.toLowerCase()));
-    console.log("Después del filtrado de nombre:", games);
-
-    // Filtros adicionales del método anterior
-    games = games.filter(game =>
-      game.rating !== null &&
-      game.rating > 2 &&
-      game.platforms && game.platforms.length > 0 &&
-      game.genres && game.genres.length > 0 &&
-      game.released
-    );
-    console.log("Después de los filtros adicionales:", games);
-
-    // Ordenación
-    games.sort((a, b) => {
-      const ownedA = a.added_by_status && a.added_by_status.owned ? a.added_by_status.owned : 0;
-      const ownedB = b.added_by_status && b.added_by_status.owned ? b.added_by_status.owned : 0;
-
-      if (ownedA !== ownedB) {
-        return ownedB - ownedA;
-      }
-
-      if (a.rating !== b.rating) {
-        return b.rating - a.rating;
-      }
-
-      const dateA = new Date(a.released);
-      const dateB = new Date(b.released);
-      return dateB.getTime() - dateA.getTime();
+      this.games = games;
     });
-
-    this.games = games;
-  });
-}
-
-
-
-nextPage() {
-  this.currentPage++;
-  if (this.isSearching) {
-    this.search();
-  } else {
-    this.loadGames();
   }
-}
 
-previousPage() {
-  this.currentPage--;
-  if (this.isSearching) {
-    this.search();
-  } else {
-    this.loadGames();
-  }
-}
 
-loadGames() {
-  this.videogamesService.getGames(this.currentPage).subscribe(response => {
-    this.games = response.results;
-    this.totalPages = Math.floor(response.count / 21);
-  });
-}
 
-loadMoreGamesFromService() {
-  this.videogamesService.loadMoreGames().subscribe(response => {
-    this.games = [...this.games, ...response.results];
-  });
-}
-
-loadMoreGames() {
-  if (this.isSearching) {
+  nextPage() {
     this.currentPage++;
-    this.search();
-  } else {
-    this.videogamesService.getGames().subscribe(response => {
-      this.games = [...this.games, ...response.results];
+    if (this.isSearching) {
+      this.search();
+    } else {
+      this.loadGames();
+    }
+  }
+
+  previousPage() {
+    this.currentPage--;
+    if (this.isSearching) {
+      this.search();
+    } else {
+      this.loadGames();
+    }
+  }
+
+  loadGames() {
+    this.videogamesService.getGames(this.currentPage).subscribe(response => {
+      this.games = response.results;
       this.totalPages = Math.floor(response.count / 21);
     });
   }
-}
+
+  loadMoreGamesFromService() {
+    this.videogamesService.loadMoreGames().subscribe(response => {
+      this.games = [...this.games, ...response.results];
+    });
+  }
+
+  loadMoreGames() {
+    if (this.isSearching) {
+      this.currentPage++;
+      this.search();
+    } else {
+      this.videogamesService.getGames(this.currentPage).subscribe(response => {
+        this.games = [...this.games, ...response.results];
+        this.totalPages = Math.floor(response.count / 21);
+      });
+    }
+  }
 
 }
