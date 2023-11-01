@@ -31,7 +31,7 @@
 
 </div>
 <div *ngIf="games.length > 0; else noGames" class="game-grid" [class.search-mode]="isSearching" appInfiniteScroll
-    (scrollToEnd)="loadMoreGamesFromService()">
+    (scrollToEnd)="loadMoreGames()">
 </div>
 
 <ng-template #noGames>

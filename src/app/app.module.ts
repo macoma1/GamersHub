@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { PopularNewGamesComponent } from './popular-new-games/popular-new-games.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    PopularNewGamesComponent,
   ],
   imports: [
     HttpClientModule,

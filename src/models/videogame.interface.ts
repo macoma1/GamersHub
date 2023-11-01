@@ -1,5 +1,4 @@
-
-export interface RootObject {
+export interface GameResponse {
     count:                number;
     description:          string;
     filters:              Filters;

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GameResponse } from '../app/game/game.model';
+import { GameResponse } from '../models/videogame.interface';
 import { Observable } from 'rxjs';
+const currentDate = new Date();
+const twoMonthsAgo = new Date(currentDate);
+twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +33,22 @@ export class VideogamesService {
     const searchUrl = `${this.baseUrl}?key=${this.apiKey}&search=${query}&ordering=-added_by_status.owned,-rating`;
     return this.http.get<GameResponse>(searchUrl);
   }
+
+  getPopularNewGames(): Observable<GameResponse> {
+    const currentDate = new Date();
+    const twoMonthsAgo = new Date(currentDate);
+    twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+
+    const params = {
+      key: this.apiKey,
+      ordering: '-rating_top,-released',
+      rating_greater: '4.50',
+      released_after: twoMonthsAgo.toISOString().split('T')[0],
+      page_size: '8000'
+    };
+
+    return this.http.get<GameResponse>(this.baseUrl, { params });
+  }
+
 
 }
