@@ -1,5 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { GameService } from '../services/game.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -9,11 +11,21 @@ import { GameService } from '../services/game.service';
 export class AppComponent {
   
   title = 'AngularFront';
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private router: Router) {}
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
 
   loadMoreGames() {
     console.log('loadMoreGames');    
     this.gameService.emitRequestMoreGames();  
+  }
+
+  logout(): void {
+    // Borra el JWT del localStorage
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/']);
   }
 
 }

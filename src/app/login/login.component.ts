@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -23,19 +25,16 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    {
-      this.http.post('http://localhost:3000/login', this.loginForm.value)
-        .subscribe((response: any) => {
-          if (response) { // && response.token
-            alert('Inicio de sesión exitoso!');
+    this.authService.login(this.loginForm.value).subscribe(
+        (response: any) => {
             localStorage.setItem('authToken', response.token);
             this.router.navigate(['/home']);
-          }
-        }, error => {
-          // Muestra un mensaje de error al usuario
-          console.error('Error en el inicio de sesión:', error);
-        });
-    }
-  }
+        },
+        (error: any) => {
+            console.error('Error en el inicio de sesión:', error);
+        }
+    );
+}
+
 
 }

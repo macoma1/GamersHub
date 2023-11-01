@@ -1,8 +1,16 @@
 <div class="scroll-container background" appInfiniteScroll (scrollToEnd)="loadMoreGames()">
     <nav>
-        <button routerLink="/" routerLinkActive="active">Inicio</button>
-        <button routerLink="/login" routerLinkActive="active">Login</button>
-        <button routerLink="/register" routerLinkActive="active">Registro</button>
+        <!-- Botón de Inicio siempre visible -->
+        <button routerLink="/" (click)="loadMoreGames()" routerLinkActive="active">Inicio</button>
+
+        <!-- Si el usuario NO ha iniciado sesión -->
+        <button *ngIf="!isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</button>
+        <button *ngIf="!isLoggedIn()" routerLink="/register" routerLinkActive="active">Registro</button>
+
+        <!-- Si el usuario HA iniciado sesión -->
+        <button *ngIf="isLoggedIn()" routerLink="/home" routerLinkActive="active">Mi Página</button>
+        <button *ngIf="isLoggedIn()" (click)="logout()" routerLinkActive="active">Cerrar Sesión</button>
+
     </nav>
     <section>
         <router-outlet></router-outlet>
