@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { VideogamesService } from '../../services/videogames.service';
 import { Result, PlatformElement } from '../../models/videogame.interface';
+import { GameService } from '../../services/game.service'; // Importa el servicio aquí
+import { takeUntil } from 'rxjs/operators'; // Importa el operador takeUntil
+import { Subject } from 'rxjs'; // Importa Subject
 
 const SUPPORTED_PLATFORMS = [
   'playstation', 'xbox', 'pc', 'nintendo'
@@ -11,18 +14,29 @@ const SUPPORTED_PLATFORMS = [
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
+
 export class GameComponent implements OnInit {
   query: string = '';
   isSearching: boolean = false;
-  totalPages: number = 0;
   currentPage: number = 1;
   games: Result[] = [];
   filteredGames: Result[] = [];
+  pagesToShow: number[] = [];
+  private unsubscribe$ = new Subject<void>();
 
-  constructor(private videogamesService: VideogamesService) { }
+  constructor(private videogamesService: VideogamesService, private gameService: GameService) { }
 
   ngOnInit(): void {
     this.loadGames();
+    this.gameService.requestMoreGames$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.loadMoreGames();
+      });
+  }
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   scrollToTop(): void {
@@ -130,41 +144,30 @@ export class GameComponent implements OnInit {
       this.games = games;
     });
   }
-
-  nextPage() {
-    this.currentPage++;
-    if (this.isSearching) {
-      this.search();
-    } else {
-      this.loadGames();
-    }
-  }
-
-  previousPage() {
-    this.currentPage--;
-    if (this.isSearching) {
-      this.search();
-    } else {
-      this.loadGames();
-    }
-  }
+  isLoading = false;
 
   loadGames() {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
     this.videogamesService.getGames(this.currentPage).subscribe(response => {
-      this.games = response.results;
-      this.totalPages = Math.floor(response.count / 21);  // Adjust pagination according to the number of games per page
+      if (response.results.length > 0) {
+        this.games = [...this.games, ...response.results];
+        this.currentPage++;
+      } else {
+        console.log("No hay más juegos para cargar.");
+      }
+      this.isLoading = false;
+    }, error => {
+      console.error("Error cargando juegos:", error);
+      this.isLoading = false;
     });
   }
 
+
+
   loadMoreGames() {
-    if (this.isSearching) {
-      this.currentPage++;
-      this.search();
-    } else {
-      this.videogamesService.getGames(this.currentPage).subscribe(response => {
-        this.games = [...this.games, ...response.results];
-        this.totalPages = Math.floor(response.count / 21);  // Adjust pagination
-      });
-    }
+    console.log("Cargando más juegos...");
+    this.loadGames();
   }
 }

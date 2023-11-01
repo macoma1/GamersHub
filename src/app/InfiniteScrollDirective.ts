@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
+import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Directive({
   selector: '[appInfiniteScroll]'
@@ -6,15 +6,15 @@ import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angu
 export class InfiniteScrollDirective {
 
   @Output() scrollToEnd = new EventEmitter<void>();
-
-  constructor(private el: ElementRef) { }
-
   @HostListener('scroll', ['$event'])
-  onScroll(event: any) {
-    const scrollPosition = event.target.scrollTop + event.target.clientHeight;
-    const maxScroll = event.target.scrollHeight;
+  
+  onScroll(event: any): void {
+    const target = event.target;
+    const totalScrollHeight = target.scrollHeight;
+    const scrollPosition = target.scrollTop;
+    const viewportHeight = target.clientHeight;
 
-    if (maxScroll <= scrollPosition + 1) {
+    if (scrollPosition + viewportHeight >= totalScrollHeight - 50) {
       this.scrollToEnd.emit();
     }
   }

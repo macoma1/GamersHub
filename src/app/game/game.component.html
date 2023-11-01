@@ -6,7 +6,6 @@
     </div>
 </div>
 
-
 <div *ngIf="games.length > 0; else noGames" class="game-grid" [class.search-mode]="isSearching">
     <div *ngFor="let game of games" class="game-card" [class.search-mode]="isSearching">
         <img [src]="game.background_image" alt="{{ game.name }}" />
@@ -30,16 +29,9 @@
     </div>
 
 </div>
-<div *ngIf="games.length > 0; else noGames" class="game-grid" [class.search-mode]="isSearching" appInfiniteScroll
-    (scrollToEnd)="loadMoreGames()">
-</div>
+
 
 <ng-template #noGames>
-    <p>No games found</p>
+    <p></p>
 </ng-template>
-<nav class="pagination-nav" *ngIf="!isSearching">
-    <button class="page-btn" (click)="previousPage(); scrollToTop()" [disabled]="currentPage === 1">Anterior</button>
-    <span class="page-info">{{currentPage}} - {{totalPages}}</span>
-    <button class="page-btn" (click)="nextPage(); scrollToTop()"
-        [disabled]="currentPage === totalPages">Siguiente</button>
-</nav>
+

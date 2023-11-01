@@ -8,7 +8,10 @@ html, body{
   margin: 0%;
   padding: 0%;
   background-color: #121212;
+  overflow-y: hidden;
+  height: 100%;
 }
+
 
 .game-grid {
   display: grid;

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  
   title = 'AngularFront';
+  constructor(private gameService: GameService) {}
+
+  loadMoreGames() {
+    console.log('loadMoreGames');    
+    this.gameService.emitRequestMoreGames();  
+  }
+
 }

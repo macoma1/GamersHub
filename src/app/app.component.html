@@ -1,11 +1,10 @@
-<div class="background">
+<div class="scroll-container background" appInfiniteScroll (scrollToEnd)="loadMoreGames()">
     <nav>
         <button routerLink="/" routerLinkActive="active">Inicio</button>
         <button routerLink="/login" routerLinkActive="active">Login</button>
         <button routerLink="/register" routerLinkActive="active">Registro</button>
     </nav>
     <section>
-        <app-popular-new-games></app-popular-new-games>
         <router-outlet></router-outlet>
     </section>
 </div>

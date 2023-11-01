@@ -7,13 +7,13 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { PopularNewGamesComponent } from './popular-new-games/popular-new-games.component';
+import { InfiniteScrollDirective } from '../app/InfiniteScrollDirective';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PopularNewGamesComponent,
+    InfiniteScrollDirective
   ],
   imports: [
     HttpClientModule,
@@ -21,7 +21,7 @@ import { PopularNewGamesComponent } from './popular-new-games/popular-new-games.
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule
+    FormsModule    
   ],
   providers: [],
   bootstrap: [AppComponent]
