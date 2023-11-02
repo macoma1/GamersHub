@@ -1,0 +1,41 @@
+.game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.game-image {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.game-title {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.game-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.game-rating, 
+.game-metacritic, 
+.game-released, 
+.game-genres, 
+.game-stores {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.game-genres span, 
+.game-stores span {
+    margin-right: 10px;
+    background-color: #eaeaea;
+    padding: 2px 8px;
+    border-radius: 5px;
+}

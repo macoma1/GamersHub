@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GameComponent } from './game.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
+import { GameRoutingModule } from './game-routing.module';
 
 @NgModule({
   declarations: [GameComponent],
@@ -12,7 +13,7 @@ import { FormsModule } from '@angular/forms';
     RouterModule.forChild([
       { path: '', component: GameComponent }
     ]),
-    
+    GameRoutingModule  
   ]
 })
 export class GameModule { }

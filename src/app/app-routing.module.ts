@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { GameInfoComponent } from './game-info/game-info.component';
+
 
 
 
@@ -12,7 +14,9 @@ const routes: Routes = [
   {
     path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)
   },
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'game/:id', component: GameInfoComponent },
+  { path: '**', redirectTo: '' }  
 ];
 
 @NgModule({

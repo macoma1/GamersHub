@@ -1,0 +1,23 @@
+<div *ngIf="game" class="game-container">
+    <img [src]="game.background_image" alt="{{ game.name }}" class="game-image" />
+    <h1 class="game-title">{{ game.name }}</h1>
+    <div class="game-description" [innerHTML]="game.description"></div>
+    <div class="game-rating">
+        <strong>Rating:</strong> {{ game.rating }}
+    </div>
+    <div class="game-metacritic">
+        <strong>Metacritic:</strong> {{ game.metacritic }}
+    </div>
+    <div class="game-released">
+        <strong>Release Date:</strong> {{ game.released }}
+    </div>
+    <div class="game-genres">
+        <strong>Genres:</strong>
+        <span *ngFor="let genre of game.genres">{{ genre.name }}</span>
+    </div>
+    <div class="game-stores">
+        <strong>Available on:</strong>
+        <span *ngFor="let store of game.stores">{{ store.store.name }}</span>
+    </div>
+    <!-- ... y cualquier otro detalle que quieras mostrar ... -->
+</div>

@@ -40,6 +40,8 @@ export interface GameResponse {
     background_image:   string;
     clip:               null;
     dominant_color:     Color;
+    description:        string;
+    description_raw:    string;
     esrb_rating:        EsrbRating;
     genres:             Genre[];
     id:                 number;
