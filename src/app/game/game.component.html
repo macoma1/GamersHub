@@ -9,6 +9,9 @@
 <div *ngIf="games.length > 0; else noGames" class="game-grid" [class.search-mode]="isSearching">
     <div *ngFor="let game of games" class="game-card" [class.search-mode]="isSearching" [routerLink]="['/game', game.id]">
         <img [src]="game.background_image" alt="{{ game.name }}" />
+        <button class="favorite-btn" (click)="addToFavorites(game, $event)">
+            <i class="bi bi-heart"></i>
+        </button>
         <div class="game-info">
             <h3>{{ game.name }}</h3>
             <div class="stars">

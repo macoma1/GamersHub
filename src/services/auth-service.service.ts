@@ -56,4 +56,16 @@ export class AuthService {
   getToken(): string | null {
     return this.tokenSubject.value;
   }
+
+  addToFavorites(gameId: string): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    const url = `${this.baseUrl}/users/me/favorites`;
+    return this.http.post(url, { gameId: gameId }, { headers: headers });
+    
+  }
+
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = localStorage.getItem('authToken');
+    return new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  }
 }

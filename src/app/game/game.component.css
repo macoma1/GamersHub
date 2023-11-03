@@ -227,4 +227,20 @@ button:hover {
   }
 }
 
-/* ... Resto de tu código CSS ... */
+.favorite-btn {
+  position: absolute;
+  top: 10px; /* Distancia desde la parte superior del game-card */
+  right: 10px; /* Distancia desde la parte derecha del game-card */
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente para mejorar la visibilidad del botón */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.favorite-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo más oscuro al pasar el ratón por encima */
+}
+

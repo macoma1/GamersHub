@@ -6,11 +6,16 @@
 <!-- Si hay un usuario válido -->
 <div *ngIf="user && !isLoading">
     <h1>Welcome, {{ user.name }}!</h1>
+    <h2>Your Favorite Games</h2>
+    <ul>
+        <li *ngFor="let gameId of user.favoriteGames">{{ gameId }}</li>
+    </ul>
 </div>
 
 <!-- Si hay un error al cargar los datos del usuario -->
 <div *ngIf="error">
     <p>There was an error fetching the user data.</p>
 </div>
+
 <ng-template #loadingTemplate>
 </ng-template>

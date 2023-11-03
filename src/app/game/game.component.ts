@@ -4,6 +4,7 @@ import { Result, PlatformElement } from '../../models/videogame.interface';
 import { GameService } from '../../services/game.service'; // Importa el servicio aquí
 import { takeUntil } from 'rxjs/operators'; // Importa el operador takeUntil
 import { Subject } from 'rxjs'; // Importa Subject
+import { AuthService } from 'src/services/auth-service.service';
 
 const SUPPORTED_PLATFORMS = [
   'playstation', 'xbox', 'pc', 'nintendo'
@@ -24,14 +25,17 @@ export class GameComponent implements OnInit {
   pagesToShow: number[] = [];
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private videogamesService: VideogamesService, private gameService: GameService) { }
+  constructor(
+    private videogamesService: VideogamesService, 
+    private gameService: GameService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loadGames();
     this.gameService.requestMoreGames$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.loadMoreGames();
+        this.loadGames();
       });
   }
   ngOnDestroy(): void {
@@ -144,12 +148,9 @@ export class GameComponent implements OnInit {
       this.games = games;
     });
   }
-  isLoading = false;
 
   loadGames() {
-    if (this.isLoading) return;
-
-    this.isLoading = true;
+    this.gameService.isLoading = true;
     this.videogamesService.getGames(this.currentPage).subscribe(response => {
       if (response.results.length > 0) {
         this.games = [...this.games, ...response.results];
@@ -157,17 +158,19 @@ export class GameComponent implements OnInit {
       } else {
         console.log("No hay más juegos para cargar.");
       }
-      this.isLoading = false;
+      this.gameService.isLoading = false;
     }, error => {
       console.error("Error cargando juegos:", error);
-      this.isLoading = false;
+      this.gameService.isLoading = false;
     });
   }
-
-
-
-  loadMoreGames() {
-    console.log("Cargando más juegos...");
-    this.loadGames();
-  }
+  addToFavorites(game: Result, event: Event): void {
+    event.stopPropagation();
+    this.authService.addToFavorites(game.id.toString()).subscribe(response => {
+        // Maneja la respuesta aquí, por ejemplo:
+        console.log('Juego añadido a favoritos con éxito.');
+    }, error => {
+        console.error('Error al añadir el juego a favoritos:', error);
+    });
+}
 }

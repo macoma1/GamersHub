@@ -4,6 +4,6 @@ export interface User {
     name: string;
     email: string;
     profilePicture?: string;
-    //... otros campos que desees agregar
+    favoriteGames: number[];
   }
   

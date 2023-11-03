@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameComponent } from './game.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
-import { GameRoutingModule } from './game-routing.module';
+import { GameInfoComponent } from '../game-info/game-info.component';
+
+const routes: Routes = [
+    { path: '', component: GameComponent },
+    { path: ':id', component: GameInfoComponent }
+];
 
 @NgModule({
   declarations: [GameComponent],
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild([
-      { path: '', component: GameComponent }
-    ]),
-    GameRoutingModule  
+    RouterModule.forChild(routes)
   ]
 })
 export class GameModule { }
+
