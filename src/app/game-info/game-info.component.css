@@ -39,3 +39,69 @@
     padding: 2px 8px;
     border-radius: 5px;
 }
+/* Estilos generales para la sección de comentarios */
+.game-container {
+    font-family: 'Arial', sans-serif;
+}
+
+.comment-section {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+/* Estilos para cada comentario */
+.comment {
+    background-color: #f7f7f7;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment strong {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.comment p {
+    margin: 8px 0;
+}
+
+.comment small {
+    display: block;
+    color: #888;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+/* Estilos para el área de publicar comentario */
+.publish-comment {
+    margin-top: 20px;
+}
+
+.publish-comment textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    min-height: 80px;
+}
+
+.publish-comment button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.publish-comment button:hover {
+    background-color: #0056b3;
+}
+

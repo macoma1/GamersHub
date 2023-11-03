@@ -19,11 +19,10 @@ export class AppComponent {
   loadMoreGames() {
     // Solo emite la solicitud si no hay una en curso
     if (!this.gameService.getLoadingStatus()) {
-
+      console.log("Loading more games");
       this.gameService.setLoadingStatus(true);
       this.gameService.emitRequestMoreGames();
-      // Después de que la solicitud se complete, recuerda establecer isLoading en false
-      // Esto dependerá de cómo manejas la respuesta de tu API
+
     }
   }
 

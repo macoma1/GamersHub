@@ -1,0 +1,27 @@
+carousel {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+slide img {
+    height: 200px;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+h2 {
+    margin-top: 10px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}

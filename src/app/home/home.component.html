@@ -6,11 +6,16 @@
 <!-- Si hay un usuario válido -->
 <div *ngIf="user && !isLoading">
     <h1>Welcome, {{ user.name }}!</h1>
-    <h2>Your Favorite Games</h2>
-    <ul>
-        <li *ngFor="let gameId of user.favoriteGames">{{ gameId }}</li>
-    </ul>
+    <!-- <h2>Your Favorite Games</h2>
+
+    <carousel [itemsPerSlide]="4">
+        <slide *ngFor="let game of user.favoriteGames">
+            <img [src]="game.imageUrl" alt="Game Image" width="100">
+        </slide>
+    </carousel> -->
 </div>
+
+
 
 <!-- Si hay un error al cargar los datos del usuario -->
 <div *ngIf="error">

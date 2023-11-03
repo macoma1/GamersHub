@@ -19,5 +19,21 @@
         <strong>Available on:</strong>
         <span *ngFor="let store of game.stores">{{ store.store.name }}</span>
     </div>
-    <!-- ... y cualquier otro detalle que quieras mostrar ... -->
+    <h3 class="comment-section"></h3>
+    <div *ngIf="comments.length === 0">
+        <h1>There are no comments yet, be the first to comment!</h1>
+    </div>
+    <div *ngFor="let comment of comments" class="comment">
+        <strong>{{ comment.userName }}</strong>
+        <p>{{ comment.content }}</p>
+        <small>{{ comment.date | date }}</small>
+    </div>
+    <div class="publish-comment">
+        <textarea [(ngModel)]="newComment"></textarea>
+        <!-- Muestra el botón de "Publicar" si el usuario está conectado -->
+        <button *ngIf="user" (click)="postComment()">Publicar</button>
+
+        <!-- Muestra el botón de "Iniciar sesión" si el usuario no está conectado -->
+        <button *ngIf="!user" (click)="navigateToLogin()">Iniciar sesión</button>
+    </div>
 </div>

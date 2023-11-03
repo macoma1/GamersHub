@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +15,8 @@ import { GameInfoComponent } from './game-info/game-info.component';
     AppComponent,
     HomeComponent,
     InfiniteScrollDirective,
-    GameInfoComponent
+    GameInfoComponent,
+
   ],
   imports: [
     HttpClientModule,
@@ -23,7 +24,8 @@ import { GameInfoComponent } from './game-info/game-info.component';
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule    
+    FormsModule,
+    CarouselModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

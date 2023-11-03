@@ -166,11 +166,11 @@ export class GameComponent implements OnInit {
   }
   addToFavorites(game: Result, event: Event): void {
     event.stopPropagation();
-    this.authService.addToFavorites(game.id.toString()).subscribe(response => {
-        // Maneja la respuesta aquí, por ejemplo:
+    this.authService.addToFavorites(game.id.toString(), game.background_image).subscribe(response => {
         console.log('Juego añadido a favoritos con éxito.');
     }, error => {
         console.error('Error al añadir el juego a favoritos:', error);
     });
 }
+
 }

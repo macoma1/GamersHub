@@ -30,7 +30,7 @@ export class VideogamesService {
     const searchUrl = `${this.baseUrl}?key=${this.apiKey}&search=${query}&ordering=-added_by_status.owned,-rating`;
     return this.http.get<GameResponse>(searchUrl);
   }
-  
+
   getGameById(id: number): Observable<Result> {
     const url = `${this.baseUrl}/${id}?key=${this.apiKey}`;
     return this.http.get<Result>(url);
@@ -44,7 +44,7 @@ export class VideogamesService {
           // Creamos un DOMParser para analizar el HTML
           const parser = new DOMParser();
           const doc = parser.parseFromString(response.description, 'text/html');
-          
+
           // Obtener todos los párrafos del documento
           const paragraphs = doc.querySelectorAll('p');
 
@@ -57,8 +57,14 @@ export class VideogamesService {
           return response;
         })
       );
-}
+  }
+  getComments(gameId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`api/endpoint/to/get/comments/${gameId}`);
+  }
 
+  addComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>('api/endpoint/to/add/comment', comment);
+  }
 
 
 }
