@@ -7,7 +7,6 @@ import { GameInfoComponent } from './game-info/game-info.component';
 
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./game/game.module').then(m => m.GameModule) },
   {
     path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
@@ -15,9 +14,11 @@ const routes: Routes = [
     path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)
   },
   { path: 'home', component: HomeComponent },
+  { path: '', loadChildren: () => import('./game/game.module').then(m => m.GameModule) },
   { path: 'game/:id', component: GameInfoComponent },
-  { path: '**', redirectTo: '' }  
+  { path: '**', redirectTo: '' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

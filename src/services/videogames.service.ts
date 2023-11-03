@@ -11,7 +11,7 @@ export class VideogamesService {
 
   constructor(private http: HttpClient) { }
 
-  private apiKey = '43d6aa9c71354d72b67481c24b711c2e';
+  private apiKey = '7dcf9140afc547f2992bfaa2182eb0ec';
   private baseUrl = 'https://api.rawg.io/api/games';
   private pageSize = 24;
   private currentPage = 1;

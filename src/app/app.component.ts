@@ -18,12 +18,10 @@ export class AppComponent {
   }
 
   loadMoreGames() {
-    console.log('loadMoreGames');    
     this.gameService.emitRequestMoreGames();  
   }
 
   logout(): void {
-    // Borra el JWT del localStorage
     localStorage.removeItem('authToken');
     this.router.navigate(['/']);
   }
