@@ -6,136 +6,184 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrado vertical */
-  align-items: flex-end; /* Alineación a la derecha de los elementos */
+  background-color: #f4f4f4;
 }
 
 .game-container {
   width: 80%;
+  margin: 20px auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Alineación a la derecha */
-  background-repeat: no-repeat, repeat-y;
-  background-size: cover, auto;
-  background-position: center top, center top;
-  background-attachment: scroll, fixed;
+  align-items: flex-start;
+  background-size: cover;
+  background-position: center top;
   color: white;
-  margin-left: auto; /* Alineación a la derecha con margen izquierdo automático */
-  margin-right: 20px; /* Margen para que no esté pegado a la derecha */
-  box-shadow: none;
   text-shadow: 2px 2px 4px #000000;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 5px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.game-container::before {
+.game-container::after {
   content: "";
-  display: block;
   position: absolute;
   top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 0;
-}
-
-/* Asegúrate de que el contenido del contenedor esté por encima de la superposición */
-.game-container * {
-  position: relative;
+  background: rgba(0, 0, 0, 0.8);
   z-index: 1;
 }
 
-.carousel {
-  width: 80%;
-  margin: 20px auto; /* Centrado horizontalmente */
+.game-container * {
+  z-index: 2;
 }
 
-.game-title {
-  font-size: 24px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.game-description,
-.game-rating,
-.game-metacritic,
-.game-released,
-.game-genres,
-.game-stores {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.game-genres span,
-.game-stores span {
-  margin-right: 10px;
-  background-color: #eaeaea;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
-
+/* Comments Section */
 .comment-section {
-  border-top: 1px solid #e0e0e0;
-  padding-top: 20px;
-  width: 90%; /* Ajusta este valor según el ancho deseado */
-  margin-left: auto;
-  margin-right: 20px;
+  margin-top: 30px;
 }
 
 .comment {
-  background-color: #f7f7f7;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.3
+  ); /* Lighter and semitransparent background */
+  color: #fff;
   padding: 15px;
-  margin-top: 10px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  overflow-wrap: break-word;
+  width: 100%;
+  max-width: 600px;
+  min-height: 150px;
+  position: relative; /* For positioning the date */
+  font-family: "Arial", sans-serif; /* Changed font */
+  height: auto;
+  max-height: 150px;
+  overflow: hidden;
 }
 
-.comment strong {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 8px;
+.comment:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .comment p {
-  margin: 8px 0;
+  margin-top: 4px; /* Reduced space above the content */
+  font-size: 1em; /* Slightly bigger text for content */
 }
 
 .comment small {
-  display: block;
-  color: #888;
-  margin-top: 5px;
-  font-size: 12px;
+  position: absolute;
+  right: 15px;
+  bottom: 10px; /* Positioned at the bottom right */
+  font-size: 0.8em; /* Smaller font size for the date */
+  color: #fff; /* Darker grey to stand out from the background */
 }
 
-.publish-comment {
-  width: 90%; /* Ajusta este valor según el ancho deseado */
-  margin-left: auto;
-  margin-right: 20px;
-  margin-top: 20px;
+/* Encabezado de la sección de comentarios */
+.comment-section-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #555; /* Darker grey color for the title */
+  background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent background */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Botón de publicación */
+.publish-comment button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.publish-comment button:hover,
+.publish-comment button:focus {
+  background-color: #0056b3;
+  outline: none;
 }
 
 .publish-comment textarea {
   width: 100%;
-  padding: 10px;
+  height: 120px;
+  resize: none;
+  padding: 12px;
+  margin-bottom: 15px;
   border-radius: 5px;
-  border: 1px solid #e0e0e0;
-  min-height: 80px;
+  border: 1px solid #ced4da;
+  font-size: 1em;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 120px;
+  overflow-y: auto;
+}
+.custom-modal .modal-dialog {
+  max-width: none;
+  width: auto;
 }
 
-.publish-comment button {
-  display: block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+.custom-modal .modal-content {
+  max-width: fit-content;
+  margin: 1rem auto;
+}
+
+.custom-modal .modal-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1050;
+}
+
+.custom-modal .modal-header .btn-close {
+  background: none;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.publish-comment button:hover {
-  background-color: #0056b3;
+.noComments {
+  min-height: 450px;
+}
+
+.custom-modal .modal-body {
+  position: relative;
+}
+
+.modal-image {
+  /* Escala la imagen al doble de su tamaño */
+  transform: scale(3);
+  transition: transform 0.5s ease-out;
+}
+
+@keyframes fadeInImage {
+  from {
+    transform: scale(0.75);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .game-container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .comment-section,
+  .publish-comment {
+    padding: 10px;
+  }
 }

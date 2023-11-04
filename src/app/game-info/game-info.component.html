@@ -1,46 +1,82 @@
-<div *ngIf="game" class="game-container" [style.background-image]="'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%), url(' + game.background_image + ')'" >
-    
-    
-    <h1 class="game-title">{{ game.name }}</h1>
-    <div class="game-description" [innerHTML]="game.description"></div>
-    
-    <div class="game-metacritic">
-        <strong>Metacritic:</strong> {{ game.metacritic }}
-    </div>
-    <div class="game-released">
-        <strong>Release Date:</strong> {{ game.released }}
-    </div>
-    <div class="game-genres">
-        <strong>Genres:</strong>
-        <span *ngFor="let genre of game.genres">{{ genre.name }}</span>
-    </div>
-    <div class="game-stores">
-        <strong>Available on:</strong>
-        <span *ngFor="let store of game.stores">{{ store.store.name }}</span>
-    </div>
-    <div id="gameCarousel" class="carousel slide" data-ride="carousel">
-        <carousel [itemsPerSlide]="1">
-            <slide *ngFor="let screenshot of game.screenshots">
-                <img [src]="screenshot.image" alt="Screenshot" />
-            </slide>
-        </carousel>
-        
-    </div>
-    <h3 class="comment-section"></h3>
-    <div *ngIf="comments.length === 0">
-        <h1>There are no comments yet, be the first to comment!</h1>
-    </div>
-    <div *ngFor="let comment of comments" class="comment">
-        <strong>{{ comment.userName }}</strong>
-        <p>{{ comment.content }}</p>
-        <small>{{ comment.date | date }}</small>
-    </div>
-    <div class="publish-comment">
-        <textarea [(ngModel)]="newComment"></textarea>
-        <!-- Muestra el botón de "Publicar" si el usuario está conectado -->
-        <button *ngIf="user" (click)="postComment()">Publish</button>
+<div *ngIf="game" class="game-container" [style.background-image]="'url(' + game.background_image + ')'">
 
-        <!-- Muestra el botón de "Iniciar sesión" si el usuario no está conectado -->
+    <!-- Título del Juego -->
+    <h1 class="display-4 mb-3">{{ game.name }}</h1>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-6" *ngFor="let screenshot of game.screenshots; let i = index">
+                        <!-- Actualización para Bootstrap 5: "data-bs-toggle" y "data-bs-target" -->
+                        <img src="{{ screenshot.image }}" alt="Screenshot thumbnail" class="img-thumbnail"
+                            style="cursor: pointer;" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#screenshotModal-' + i">
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Columna para el resto de la información -->
+            <div class="col-md-8">
+                <!-- Información del juego -->
+                <div class="game-metacritic">
+                    <strong>Metacritic:</strong> {{ game.metacritic }}
+                </div>
+                <div class="game-released">
+                    <strong>Release Date:</strong> {{ game.released }}
+                </div>
+                <div class="game-genres">
+                    <strong>Genres:</strong>
+                    <span *ngFor="let genre of game.genres">{{ genre.name }}</span>
+                </div>
+                <div class="game-stores">
+                    <strong>Available on:</strong>
+                    <span *ngFor="let store of game.stores">{{ store.store.name }}</span>
+                </div>
+                <div class="game-description" [innerHTML]="game.description"></div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Sección de Comentarios -->
+    <h3 class="comment-section">Comments</h3>
+    <div *ngIf="comments.length === 0">
+        <h1 class="noComments">There are no comments yet, be the first to comment!</h1>
+    </div>
+    <div *ngFor="let comment of displayedComments" class="comment" [hidden]="comments.length ? false : true">
+        <div *ngIf="comment.content; else placeholder">
+            <p>{{ comment.userName }}</p>
+            <p>{{ comment.content }}</p>
+            <small>{{ comment.date | date: 'medium' }}</small>
+        </div>
+        <ng-template #placeholder>
+            <div class="comment-placeholder">
+            </div>
+        </ng-template>
+    </div>
+
+    <div *ngIf="comments" [hidden]="comments.length ? false : true">
+        <button (click)="loadMoreComments()">More...</button>
+    </div>
+
+    <div class="publish-comment">
+        <textarea [(ngModel)]="newComment" maxlength="160"></textarea>
+        <button *ngIf="user" (click)="postComment()">Publish</button>
         <button *ngIf="!user" (click)="navigateToLogin()">Login</button>
     </div>
+
 </div>
+<ng-container *ngFor="let screenshot of game?.screenshots; let i = index">
+    <div class="modal" [id]="'screenshotModal-' + i" tabindex="-1" aria-labelledby="'screenshotModalLabel-' + i" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Eliminar el modal-header si no lo necesitas -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <img src="{{ screenshot.image }}" alt="Screenshot {{i + 1}}" class="img-fluid modal-image">
+                </div>
+            </div>
+        </div>
+    </div>    
+</ng-container>
