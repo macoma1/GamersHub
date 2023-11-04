@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VideogamesService } from '../../services/videogames.service';
-import { Result } from '../../models/videogame.interface';
+import { Result, Screenshot } from '../../models/videogame.interface';
 import { AuthService } from '../../services/auth-service.service';
 import { User } from '../../models/user.model';
 import { CommentsService } from '../../services/comments.service';
 import { Comment } from '../../models/comment.model';
-import { GameService } from 'src/services/game.service';
+import { GameService } from '../../services/game.service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-game-info',
   templateUrl: './game-info.component.html',
   styleUrls: ['./game-info.component.css']
 })
+
 export class GameInfoComponent implements OnInit {
   game: Result | null = null;
   comments: Comment[] = [];
   newComment: string = '';
   user: User | null = null;
+  screenshots?: Screenshot[];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +29,7 @@ export class GameInfoComponent implements OnInit {
     private authService: AuthService,
     private commentsService: CommentsService,
     private gameService: GameService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -35,12 +38,19 @@ export class GameInfoComponent implements OnInit {
     if (gameId) {
       this.videogamesService.getGameInfo(+gameId).subscribe(response => {
         this.game = response;
-      });
-      this.commentsService.getComments(+gameId).subscribe(comments => {
-        this.comments = comments;
+        // Now get the screenshots once you have the game info
+        this.videogamesService.getScreenshots(+gameId).subscribe(screenshots => {
+          if (this.game) {
+            this.game.screenshots = screenshots;
+          }
+        });
+  
+        this.commentsService.getComments(+gameId).subscribe(comments => {
+          this.comments = comments;
+        });
       });
     }
-
+    
     if (this.authService.getToken()) {
       console.log('Token: ' + this.authService.getToken());
       this.authService.getCurrentUser().subscribe(
@@ -53,7 +63,7 @@ export class GameInfoComponent implements OnInit {
       );
     }
   }
-
+  
   postComment(): void {
     if (this.user && this.newComment.trim() && this.game) {
       const comment: Comment = {

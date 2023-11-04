@@ -1,107 +1,141 @@
-.game-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+html {
+  height: 100%;
 }
 
-.game-image {
-    width: 100%;
-    border-radius: 10px;
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado vertical */
+  align-items: flex-end; /* Alineación a la derecha de los elementos */
+}
+
+.game-container {
+  width: 80%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alineación a la derecha */
+  background-repeat: no-repeat, repeat-y;
+  background-size: cover, auto;
+  background-position: center top, center top;
+  background-attachment: scroll, fixed;
+  color: white;
+  margin-left: auto; /* Alineación a la derecha con margen izquierdo automático */
+  margin-right: 20px; /* Margen para que no esté pegado a la derecha */
+  box-shadow: none;
+  text-shadow: 2px 2px 4px #000000;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+}
+
+.game-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+/* Asegúrate de que el contenido del contenedor esté por encima de la superposición */
+.game-container * {
+  position: relative;
+  z-index: 1;
+}
+
+.carousel {
+  width: 80%;
+  margin: 20px auto; /* Centrado horizontalmente */
 }
 
 .game-title {
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
-.game-description {
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-.game-rating, 
-.game-metacritic, 
-.game-released, 
-.game-genres, 
+.game-description,
+.game-rating,
+.game-metacritic,
+.game-released,
+.game-genres,
 .game-stores {
-    font-size: 16px;
-    margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
-.game-genres span, 
+.game-genres span,
 .game-stores span {
-    margin-right: 10px;
-    background-color: #eaeaea;
-    padding: 2px 8px;
-    border-radius: 5px;
-}
-/* Estilos generales para la sección de comentarios */
-.game-container {
-    font-family: 'Arial', sans-serif;
+  margin-right: 10px;
+  background-color: #eaeaea;
+  padding: 2px 8px;
+  border-radius: 5px;
 }
 
 .comment-section {
-    border-top: 1px solid #e0e0e0;
-    padding-top: 20px;
-    margin-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+  width: 90%; /* Ajusta este valor según el ancho deseado */
+  margin-left: auto;
+  margin-right: 20px;
 }
 
-/* Estilos para cada comentario */
 .comment {
-    background-color: #f7f7f7;
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f7f7f7;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .comment strong {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 8px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .comment p {
-    margin: 8px 0;
+  margin: 8px 0;
 }
 
 .comment small {
-    display: block;
-    color: #888;
-    margin-top: 5px;
-    font-size: 12px;
+  display: block;
+  color: #888;
+  margin-top: 5px;
+  font-size: 12px;
 }
 
-/* Estilos para el área de publicar comentario */
 .publish-comment {
-    margin-top: 20px;
+  width: 90%; /* Ajusta este valor según el ancho deseado */
+  margin-left: auto;
+  margin-right: 20px;
+  margin-top: 20px;
 }
 
 .publish-comment textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #e0e0e0;
-    min-height: 80px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  min-height: 80px;
 }
 
 .publish-comment button {
-    display: block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  display: block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .publish-comment button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
-

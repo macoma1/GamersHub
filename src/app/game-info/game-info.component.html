@@ -1,10 +1,9 @@
-<div *ngIf="game" class="game-container">
-    <img [src]="game.background_image" alt="{{ game.name }}" class="game-image" />
+<div *ngIf="game" class="game-container" [style.background-image]="'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%), url(' + game.background_image + ')'" >
+    
+    
     <h1 class="game-title">{{ game.name }}</h1>
     <div class="game-description" [innerHTML]="game.description"></div>
-    <div class="game-rating">
-        <strong>Rating:</strong> {{ game.rating }}
-    </div>
+    
     <div class="game-metacritic">
         <strong>Metacritic:</strong> {{ game.metacritic }}
     </div>
@@ -19,6 +18,14 @@
         <strong>Available on:</strong>
         <span *ngFor="let store of game.stores">{{ store.store.name }}</span>
     </div>
+    <div id="gameCarousel" class="carousel slide" data-ride="carousel">
+        <carousel [itemsPerSlide]="1">
+            <slide *ngFor="let screenshot of game.screenshots">
+                <img [src]="screenshot.image" alt="Screenshot" />
+            </slide>
+        </carousel>
+        
+    </div>
     <h3 class="comment-section"></h3>
     <div *ngIf="comments.length === 0">
         <h1>There are no comments yet, be the first to comment!</h1>
@@ -31,9 +38,9 @@
     <div class="publish-comment">
         <textarea [(ngModel)]="newComment"></textarea>
         <!-- Muestra el botón de "Publicar" si el usuario está conectado -->
-        <button *ngIf="user" (click)="postComment()">Publicar</button>
+        <button *ngIf="user" (click)="postComment()">Publish</button>
 
         <!-- Muestra el botón de "Iniciar sesión" si el usuario no está conectado -->
-        <button *ngIf="!user" (click)="navigateToLogin()">Iniciar sesión</button>
+        <button *ngIf="!user" (click)="navigateToLogin()">Login</button>
     </div>
 </div>

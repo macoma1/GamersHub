@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GameResponse, Result } from '../models/videogame.interface';
+import { GameResponse, Result, Screenshot } from '../models/videogame.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';  // Importa el operador map
-
 @Injectable({
   providedIn: 'root'
 })
@@ -65,6 +64,15 @@ export class VideogamesService {
   addComment(comment: Comment): Observable<Comment> {
     return this.http.post<Comment>('api/endpoint/to/add/comment', comment);
   }
+  // En VideogamesService
+
+  getScreenshots(gameId: number): Observable<Screenshot[]> {
+    const url = `${this.baseUrl}/${gameId}/screenshots?key=${this.apiKey}`;
+    return this.http.get<any>(url).pipe(
+      map(response => response.results)
+    );
+  }
+
 
 
 }
