@@ -6,19 +6,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div class="row">
-                    <div class="col-6" *ngFor="let screenshot of game.screenshots; let i = index">
-                        <!-- Actualización para Bootstrap 5: "data-bs-toggle" y "data-bs-target" -->
-                        <img src="{{ screenshot.image }}" alt="Screenshot thumbnail" class="img-thumbnail"
-                            style="cursor: pointer;" data-bs-toggle="modal"
-                            [attr.data-bs-target]="'#screenshotModal-' + i">
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Columna para el resto de la información -->
-            <div class="col-md-8">
                 <!-- Información del juego -->
                 <div class="game-metacritic">
                     <strong>Metacritic:</strong> {{ game.metacritic }}
@@ -36,6 +23,26 @@
                 </div>
                 <div class="game-description" [innerHTML]="game.description"></div>
             </div>
+            <div class="col-md-8 screenshotsDiv">
+                <div class="row">
+                    <ng-container *ngIf="game.screenshots; else loadingScreenshots">
+                        <div class="col-4" *ngFor="let screenshot of game.screenshots; let i = index">
+                            <img src="{{ screenshot.image }}" alt="Screenshot thumbnail" class="img-thumbnail"
+                                style="cursor: pointer;" data-bs-toggle="modal"
+                                [attr.data-bs-target]="'#screenshotModal-' + i">
+                        </div>
+                    </ng-container>
+                    <ng-template #loadingScreenshots>
+                        <!-- Placeholders para las imágenes cuando están cargando -->
+                        <div class="col-6 loading-placeholder" *ngFor="let dummy of [].constructor(6)">
+                            <!-- Placeholder vacío -->
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <!-- Columna para el resto de la información -->
+           
 
         </div>
     </div>
@@ -68,7 +75,7 @@
         <button (click)="loadPreviousComments()" class="btn-load-more">
             <i class="bi bi-arrow-left"></i>
         </button>
-        
+
     </div>
 
     <div class="publish-comment">

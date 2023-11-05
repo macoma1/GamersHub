@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VideogamesService } from '../../services/videogames.service';
-import { Result, Screenshot } from '../../models/videogame.interface';
+import { Result, Screenshot } from '../../models/videogame.model';
 import { AuthService } from '../../services/auth-service.service';
 import { User } from '../../models/user.model';
 import { CommentsService } from '../../services/comments.service';

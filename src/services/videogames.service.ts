@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GameResponse, Result, Screenshot } from '../models/videogame.interface';
+import { GameResponse, Result, Screenshot } from '../models/videogame.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';  // Importa el operador map
 @Injectable({

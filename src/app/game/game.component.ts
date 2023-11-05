@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VideogamesService } from '../../services/videogames.service';
-import { Result, PlatformElement } from '../../models/videogame.interface';
+import { Result, PlatformElement } from '../../models/videogame.model';
 import { GameService } from '../../services/game.service'; // Importa el servicio aquí
 import { takeUntil } from 'rxjs/operators'; // Importa el operador takeUntil
 import { Subject } from 'rxjs'; // Importa Subject

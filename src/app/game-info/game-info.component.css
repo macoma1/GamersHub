@@ -1,9 +1,5 @@
-html {
-  height: 100%;
-}
-
 body {
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #f4f4f4;
@@ -33,6 +29,16 @@ body {
   bottom: 0;
   background: rgba(0, 0, 0, 0.8);
   z-index: 1;
+}
+
+
+.img-thumbnail {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  margin: 3.8%;
+  min-width: 300px;
+  border-radius: 0px;
 }
 
 .game-container * {
@@ -175,7 +181,9 @@ body {
 .btn-delete:hover {
   color: red;
 }
-
+.screenshotsDiv{
+  overflow: hidden;
+}
 /* Bootstrap icon adjustments */
 .bi-trash {
   font-size: 1.25rem; /* Adjust size as needed */
@@ -202,6 +210,44 @@ body {
   max-width: 600px;
 }
 
+.loading-placeholder {
+  height: 160px; /* Altura de los screenshots */
+  background-color: transparent; /* Un color de fo;ndo para el placeholder */
+  border-radius: 4px; /* Si quieres bordes redondeados para el placeholder */
+  margin-bottom: 15px; /* Mantener consistencia en el espaciado */
+  animation: pulse 1.5s infinite ease-in-out; /* Una pequeña animación de pulso */
+}
+.screenshot-container {
+  display: flex;
+  flex-wrap: nowrap; /* Asegúrate de que las imágenes se mantengan en una fila */
+  overflow-x: auto; /* Habilita el desplazamiento horizontal */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  margin: 0 -15px; /* Ajustar según tu diseño */
+}
+
+.screenshot-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari y Opera */
+}
+
+.img-thumbnail {
+  flex: 0 0 auto; /* Esto asegura que las imágenes no se estiren o encogen */
+  margin-right: 15px; /* Espaciado entre imágenes */
+  min-width: 300px; /* Tamaño mínimo para las imágenes */
+  width: auto; /* Esto asegura que las imágenes conserven su tamaño original si es mayor a 300px */
+  height: auto; /* Esto asegura que la altura de la imagen se ajuste proporcionalmente */
+}
+
+/* Estilo para ocultar la barra de desplazamiento pero permitir el scroll */
+.screenshot-container::-webkit-scrollbar {
+  display: none; /* Para navegadores webkit como Chrome y Safari */
+}
+
+.screenshot-container {
+  -ms-overflow-style: none;  /* Para Internet Explorer y Edge */
+  scrollbar-width: none;  /* Para Firefox */
+}
+
 @keyframes fadeInImage {
   from {
     transform: scale(0.75);
@@ -223,5 +269,15 @@ body {
   .comment-section,
   .publish-comment {
     padding: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .screenshot-container {
+    margin: 0 -10px;
+  }
+
+  .screenshot-thumbnail {
+    min-width: 120px; /* Tamaño más pequeño para pantallas más estrechas */
+    margin-right: 10px; /* Espaciado menor entre imágenes */
   }
 }
