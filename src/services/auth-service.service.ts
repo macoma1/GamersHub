@@ -5,6 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { catchError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -62,10 +64,30 @@ export class AuthService {
     const url = `${this.baseUrl}/users/me/favorites`;
     return this.http.post(url, { gameId: gameId, imageUrl: imageUrl }, { headers: headers });
   }
-
-
+  removeFromFavorites(gameId: string): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    const url = `${this.baseUrl}/users/me/favorites/${gameId}`;
+    return this.http.delete(url, { headers: headers });
+  }
+  
   private createAuthorizationHeader(): HttpHeaders {
     const token = localStorage.getItem('authToken');
     return new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  }
+
+  getFavorites(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    const url = `${this.baseUrl}/users/me/favoriteGames`;
+    return this.http.get<User>(url, { headers: headers });
+  }
+
+  isGameInFavorites(gameId: number): Observable<boolean> {
+    return this.getFavorites().pipe(
+      map(user => user.favoriteGames.some((favGame: { gameId: number }) => favGame.gameId === gameId)),
+      catchError((error: any) => {
+        console.error('Error al verificar si el juego está en favoritos:', error);
+        return of(false);
+      })
+    );
   }
 }

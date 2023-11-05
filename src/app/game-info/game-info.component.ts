@@ -66,7 +66,7 @@ export class GameInfoComponent implements OnInit {
     }
     this.loadComments();
   }
-  
+
   openModal(index: number): void {
     const modalId = `screenshotModal-${index}`;
     const modalElement = document.getElementById(modalId);
@@ -101,25 +101,12 @@ export class GameInfoComponent implements OnInit {
     const start = (this.commentPage - 1) * this.commentsPerPage;
     let end = start + this.commentsPerPage;
     const maxPages = Math.ceil(this.comments.length / this.commentsPerPage);
-
-    // Solo toma los comentarios que corresponden a la página actual.
     this.displayedComments = this.comments.slice(start, end);
-
-    // Si estamos en la primera página o la última página y hay menos comentarios de los esperados,
-    // entonces llenamos con placeholders.
-    if (this.commentPage === 1 || this.commentPage === maxPages) {
-      const placeholdersCount = this.commentsPerPage - this.displayedComments.length;
-
-      // Agrega placeholders solo si es necesario.
-      for (let i = 0; i < placeholdersCount; i++) {
-        this.displayedComments.push(this.createPlaceholderComment());
-      }
+    while (this.displayedComments.length < this.commentsPerPage) {
+      this.displayedComments.push(this.createPlaceholderComment());
     }
   }
 
-
-  // Método para crear un comentario placeholder.
-  // Método para crear un comentario placeholder.
   createPlaceholderComment(): Comment {
     return {
       email: '',
@@ -134,14 +121,18 @@ export class GameInfoComponent implements OnInit {
 
   loadMoreComments(): void {
     const maxPages = Math.ceil(this.comments.length / this.commentsPerPage);
-    this.commentPage++;
-    if (this.commentPage > maxPages) {
-      this.commentPage = 1;
+    if (this.commentPage < maxPages) {
+      this.commentPage++;
+      this.displayComments();
     }
 
-    this.displayComments();
   }
-
+  loadPreviousComments(): void {
+    if (this.commentPage > 1) {
+      this.commentPage--;
+      this.displayComments();
+    }
+  }
   postComment(): void {
     if (this.user && this.newComment.trim() && this.game) {
       const comment: Comment = {
@@ -153,7 +144,7 @@ export class GameInfoComponent implements OnInit {
 
       this.commentsService.addComment(comment).subscribe(
         newComment => {
-          this.comments.push(newComment);
+          this.loadComments();
           this.newComment = '';
         },
         error => {
@@ -162,7 +153,26 @@ export class GameInfoComponent implements OnInit {
       );
     }
   }
-
+  deleteComment(commentId: string): void {
+    if (confirm('DELETE?')) {
+      this.commentsService.deleteComment(commentId).subscribe(
+        () => {
+          const remainingComments = this.comments.length - 1;
+          const isLastCommentOnPage = remainingComments % this.commentsPerPage === 0;
+          const isFirstCommentOnPage = (remainingComments + 1) % this.commentsPerPage === 0;
+          if (isLastCommentOnPage && this.commentPage > 1) {
+            this.commentPage--;
+          }
+          if (!isFirstCommentOnPage || this.commentPage === 1) {
+            this.loadComments();
+          }
+        },
+        error => {
+          console.error('Error deleting comment', error);
+        }
+      );
+    }
+  }
   navigateToLogin(): void {
     this.router.navigate(['/login']);
   }

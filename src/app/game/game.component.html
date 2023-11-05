@@ -1,4 +1,3 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
 <div class="search-bar">
     <div class="input-group">
         <input type="text" [(ngModel)]="query" placeholder="Search Game..." (keyup.enter)="search()">
@@ -7,10 +6,14 @@
 </div>
 
 <div *ngIf="games.length > 0; else noGames" class="game-grid" [class.search-mode]="isSearching">
-    <div *ngFor="let game of games" class="game-card" [class.search-mode]="isSearching" [routerLink]="['/game', game.id]">
+    <div *ngFor="let game of games" class="game-card" [class.search-mode]="isSearching"
+        [routerLink]="['/game', game.id]">
         <img [src]="game.background_image" alt="{{ game.name }}" />
-        <button class="favorite-btn" (click)="addToFavorites(game, $event)">
-            <i class="bi bi-heart"></i>
+        <button class="favorite-btn" (click)="toggleFavorite(game, $event); $event.stopPropagation();">
+            <i class="bi" [ngClass]="{
+                 'bi-heart': !isFavorite(game.id),
+                 'bi-heart-fill': isFavorite(game.id)
+               }"></i>
         </button>
         <div class="game-info">
             <h3>{{ game.name }}</h3>
@@ -33,4 +36,3 @@
 </div>
 <ng-template #noGames>
 </ng-template>
-

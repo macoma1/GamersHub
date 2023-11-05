@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth-service.service';
 })
 export class HomeComponent implements OnInit {
   user: User | null = null;
-  isLoading = true; // Suponemos que está cargando inicialmente
+  isLoading = true;
   error: any = null;
 
   constructor(private authService: AuthService) {}
@@ -19,11 +19,11 @@ export class HomeComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(
       user => {
         this.user = user;
-        this.isLoading = false; // Datos cargados exitosamente, detiene la "carga"
+        this.isLoading = false;
       },
       error => {
         console.error('Error fetching user', error);
-        this.isLoading = false; // Hubo un error, pero detiene la "carga"
+        this.isLoading = false;
         this.error = error;
       }
     );

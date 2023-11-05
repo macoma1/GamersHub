@@ -49,6 +49,11 @@
             <p>{{ comment.userName }}</p>
             <p>{{ comment.content }}</p>
             <small>{{ comment.date | date: 'medium' }}</small>
+            <button *ngIf="user?.email === comment.email" (click)="deleteComment(comment._id!)"
+                class="btn-delete btn btn-danger btn-sm" title="Delete comment">
+                <i class="bi bi-trash"></i>
+            </button>
+
         </div>
         <ng-template #placeholder>
             <div class="comment-placeholder">
@@ -56,8 +61,14 @@
         </ng-template>
     </div>
 
-    <div *ngIf="comments" [hidden]="comments.length ? false : true">
-        <button (click)="loadMoreComments()">More...</button>
+    <div class="prevNext" *ngIf="comments && comments.length > 0">
+        <button (click)="loadMoreComments()" class="btn-load-more">
+            <i class="bi bi-arrow-right"></i>
+        </button>
+        <button (click)="loadPreviousComments()" class="btn-load-more">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+        
     </div>
 
     <div class="publish-comment">
@@ -68,7 +79,8 @@
 
 </div>
 <ng-container *ngFor="let screenshot of game?.screenshots; let i = index">
-    <div class="modal" [id]="'screenshotModal-' + i" tabindex="-1" aria-labelledby="'screenshotModalLabel-' + i" aria-hidden="true">
+    <div class="modal" [id]="'screenshotModal-' + i" tabindex="-1" aria-labelledby="'screenshotModalLabel-' + i"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <!-- Eliminar el modal-header si no lo necesitas -->
@@ -78,5 +90,5 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </ng-container>

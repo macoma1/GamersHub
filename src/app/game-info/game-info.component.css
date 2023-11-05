@@ -151,7 +151,7 @@ body {
 }
 
 .noComments {
-  min-height: 450px;
+  min-height: 515px;
 }
 
 .custom-modal .modal-body {
@@ -159,9 +159,47 @@ body {
 }
 
 .modal-image {
-  /* Escala la imagen al doble de su tamaño */
   transform: scale(3);
   transition: transform 0.5s ease-out;
+}
+.btn-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  color: white;
+  border: none;
+}
+
+/* Change color on hover */
+.btn-delete:hover {
+  color: red;
+}
+
+/* Bootstrap icon adjustments */
+.bi-trash {
+  font-size: 1.25rem; /* Adjust size as needed */
+}
+
+/* Adjust the top-right position as needed */
+.comment .btn-delete {
+  top: 10px;
+  right: 10px;
+}
+.btn-load-more {
+  background-color: transparent;
+  color: white; /* O el color que desees */
+  border: none;
+  font-size: 2em;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  float: right; /* Alinea el botón a la derecha */
+}
+.prevNext {
+  width: 100%;
+  max-width: 600px;
 }
 
 @keyframes fadeInImage {

@@ -4,11 +4,9 @@ export interface User {
   name: string;
   email: string;
   profilePicture?: string;
-  favoriteGames: [
-    {
-      gameId: number,
-      imageUrl: string
-    }
-  ];
+  favoriteGames: {
+    gameId: number,
+    imageUrl: string
+  }[];
 
 }

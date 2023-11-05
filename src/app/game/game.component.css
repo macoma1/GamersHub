@@ -183,14 +183,23 @@ button:hover {
   background-color: #34495e; /* Un tono ligeramente más oscuro para el hover */
 }
 
-/* ... Otro código CSS ... */
-
 .game-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* Default: 5 juegos por fila */
   gap: 20px;
   padding: 20px;
 }
+.game-card .bi-trash {
+  display: none;
+}
+
+.game-card:hover .bi-trash {
+  display: inline;
+}
+.game-card:hover .favorite-btn {
+  background-color: red;
+}
+
 
 @media screen and (max-width: 2000px) {
   .game-grid {
@@ -204,7 +213,6 @@ button:hover {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
 
 /* Cambia a 3 juegos por fila cuando la ventana es menor a 900px */
 @media screen and (max-width: 900px) {
@@ -231,7 +239,12 @@ button:hover {
   position: absolute;
   top: 10px; /* Distancia desde la parte superior del game-card */
   right: 10px; /* Distancia desde la parte derecha del game-card */
-  background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente para mejorar la visibilidad del botón */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.6
+  ); /* Fondo semi-transparente para mejorar la visibilidad del botón */
   color: white;
   border: none;
   padding: 5px 10px;
@@ -241,6 +254,10 @@ button:hover {
 }
 
 .favorite-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo más oscuro al pasar el ratón por encima */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  );
 }
-
