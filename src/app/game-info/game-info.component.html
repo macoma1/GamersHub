@@ -27,63 +27,65 @@
                 <div class="row">
                     <ng-container *ngIf="game.screenshots; else loadingScreenshots">
                         <div class="col-4" *ngFor="let screenshot of game.screenshots; let i = index">
-                            <img src="{{ screenshot.image }}" alt="Screenshot thumbnail" class="img-thumbnail"
-                                style="cursor: pointer;" data-bs-toggle="modal"
+                            <img src="{{ screenshot.image }}" alt="Screenshot thumbnail"
+                                class="img-thumbnail lazy-loaded" style="cursor: pointer;" data-bs-toggle="modal"
                                 [attr.data-bs-target]="'#screenshotModal-' + i">
                         </div>
                     </ng-container>
                     <ng-template #loadingScreenshots>
                         <!-- Placeholders para las imágenes cuando están cargando -->
                         <div class="col-6 loading-placeholder" *ngFor="let dummy of [].constructor(6)">
-                            <!-- Placeholder vacío -->
+
                         </div>
                     </ng-template>
                 </div>
             </div>
 
             <!-- Columna para el resto de la información -->
-           
+
 
         </div>
     </div>
-    <!-- Sección de Comentarios -->
-    <h3 class="comment-section">Comments</h3>
-    <div *ngIf="comments.length === 0">
-        <h1 class="noComments">There are no comments yet, be the first to comment!</h1>
-    </div>
-    <div *ngFor="let comment of displayedComments" class="comment" [hidden]="comments.length ? false : true">
-        <div *ngIf="comment.content; else placeholder">
-            <p>{{ comment.userName }}</p>
-            <p>{{ comment.content }}</p>
-            <small>{{ comment.date | date: 'medium' }}</small>
-            <button *ngIf="user?.email === comment.email" (click)="deleteComment(comment._id!)"
-                class="btn-delete btn btn-danger btn-sm" title="Delete comment">
-                <i class="bi bi-trash"></i>
+    <div class="comments-container">
+        <h3 class="comment-section">Comments</h3>
+        <div *ngIf="comments.length === 0">
+            <h1 class="noComments">There are no comments yet, be the first to comment!</h1>
+        </div>
+        <div *ngFor="let comment of displayedComments" class="comment" [hidden]="comments.length ? false : true">
+            <div *ngIf="comment.content; else placeholder">
+                <p>{{ comment.userName }}</p>
+                <p>{{ comment.content }}</p>
+                <small>{{ comment.date | date: 'medium' }}</small>
+                <button *ngIf="user?.email === comment.email" (click)="deleteComment(comment._id!)"
+                    class="btn-delete btn btn-danger btn-sm" title="Delete comment">
+                    <i class="bi bi-trash"></i>
+                </button>
+
+            </div>
+            <ng-template #placeholder>
+                <div class="comment-placeholder">
+                </div>
+            </ng-template>
+        </div>
+
+        <div class="prevNext" *ngIf="comments && comments.length > 0">
+            <button (click)="loadPreviousComments()" class="btn-load-more">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <button (click)="loadMoreComments()" class="btn-load-more">
+                <i class="bi bi-arrow-right"></i>
             </button>
 
+
         </div>
-        <ng-template #placeholder>
-            <div class="comment-placeholder">
-            </div>
-        </ng-template>
-    </div>
 
-    <div class="prevNext" *ngIf="comments && comments.length > 0">
-        <button (click)="loadMoreComments()" class="btn-load-more">
-            <i class="bi bi-arrow-right"></i>
-        </button>
-        <button (click)="loadPreviousComments()" class="btn-load-more">
-            <i class="bi bi-arrow-left"></i>
-        </button>
+        <div class="publish-comment">
+            <textarea [(ngModel)]="newComment" maxlength="160"></textarea>
+            <button *ngIf="user" (click)="postComment()">Publish</button>
+            <button *ngIf="!user" (click)="navigateToLogin()">Login</button>
+        </div>
 
     </div>
-
-    <div class="publish-comment">
-        <textarea [(ngModel)]="newComment" maxlength="160"></textarea>
-        <button *ngIf="user" (click)="postComment()">Publish</button>
-        <button *ngIf="!user" (click)="navigateToLogin()">Login</button>
-    </div>
-
 </div>
 <ng-container *ngFor="let screenshot of game?.screenshots; let i = index">
     <div class="modal" [id]="'screenshotModal-' + i" tabindex="-1" aria-labelledby="'screenshotModalLabel-' + i"

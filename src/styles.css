@@ -29,6 +29,16 @@ html, body{
   flex-direction: column;
   padding-top: 10px;
 }
+/* Para navegadores basados en WebKit como Chrome, Safari, Opera */
+::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra de desplazamiento */
+  background: rgba(0, 0, 0, 0); /* Barra de desplazamiento completamente transparente */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5); /* Color y transparencia de la "manija" de la barra de desplazamiento */
+  border-radius: 5px;
+}
 
 .game-card:hover {
   transform: scale(1.05);

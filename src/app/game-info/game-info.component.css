@@ -7,17 +7,17 @@ body {
 
 .game-container {
   width: 80%;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 2.5vh auto; /* Ajustado a vh para un espaciado relativo */
+  padding: 1.25vw; /* Ajustado a vw para mantener el espaciado proporcional */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-size: cover;
   background-position: center top;
   color: white;
-  text-shadow: 2px 2px 4px #000000;
+  text-shadow: 0.1vw 0.1vw 0.2vw #000000; /* Ajustado a vw para sombras de texto proporcionales */
   position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.1); /* Ajustado a vw para sombras proporcionales */
 }
 
 .game-container::after {
@@ -27,10 +27,9 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   z-index: 1;
 }
-
 
 .img-thumbnail {
   border: none;
@@ -58,22 +57,37 @@ body {
     0.3
   ); /* Lighter and semitransparent background */
   color: #fff;
-  padding: 15px;
+  padding: 3%;
   border-radius: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 1%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   overflow-wrap: break-word;
   width: 100%;
-  max-width: 600px;
-  min-height: 150px;
+  min-height: 15vh;
   position: relative; /* For positioning the date */
   font-family: "Arial", sans-serif; /* Changed font */
   height: auto;
-  max-height: 150px;
+  max-height: 15vh;
   overflow: hidden;
 }
+.comments-container {
+  width: 60%;
+}
 
+.comments-container::after {
+  content: "";
+  display: block;
+  padding-bottom: 33.33%; /* Esto mantendrá la relación de aspecto si decides no usar aspect-ratio */
+}
+
+@media (max-width: 768px) {
+  .comments-container {
+    width: 95%; /* Ajuste para pantallas más pequeñas */
+    padding: 10px;
+    aspect-ratio: auto; /* O puedes cambiar la relación de aspecto para dispositivos móviles si es necesario */
+  }
+}
 .comment:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
@@ -113,6 +127,7 @@ body {
   transition: background-color 0.3s ease;
   font-size: 1em;
   font-weight: 600;
+  margin-right: 40%;
 }
 
 .publish-comment button:hover,
@@ -122,7 +137,7 @@ body {
 }
 
 .publish-comment textarea {
-  width: 100%;
+  width: 40%;
   height: 120px;
   resize: none;
   padding: 12px;
@@ -165,7 +180,7 @@ body {
 }
 
 .modal-image {
-  transform: scale(3);
+  transform: scale(2);
   transition: transform 0.5s ease-out;
 }
 .btn-delete {
@@ -181,7 +196,7 @@ body {
 .btn-delete:hover {
   color: red;
 }
-.screenshotsDiv{
+.screenshotsDiv {
   overflow: hidden;
 }
 /* Bootstrap icon adjustments */
@@ -205,10 +220,7 @@ body {
   transition: color 0.3s ease-in-out;
   float: right; /* Alinea el botón a la derecha */
 }
-.prevNext {
-  width: 100%;
-  max-width: 600px;
-}
+
 
 .loading-placeholder {
   height: 160px; /* Altura de los screenshots */
@@ -244,8 +256,8 @@ body {
 }
 
 .screenshot-container {
-  -ms-overflow-style: none;  /* Para Internet Explorer y Edge */
-  scrollbar-width: none;  /* Para Firefox */
+  -ms-overflow-style: none; /* Para Internet Explorer y Edge */
+  scrollbar-width: none; /* Para Firefox */
 }
 
 @keyframes fadeInImage {
@@ -279,5 +291,50 @@ body {
   .screenshot-thumbnail {
     min-width: 120px; /* Tamaño más pequeño para pantallas más estrechas */
     margin-right: 10px; /* Espaciado menor entre imágenes */
+  }
+}
+@media (max-width: 1300px) {
+  .comment {    
+    min-height: 18vh;
+    width: 100%;
+  }
+  .prevNext{
+    margin-left: 40%;
+  }
+  .modal-image {
+    transform: scale(1.5);
+    transition: transform 0.5s ease-out;
+  }
+}
+@media (max-width: 1000px) {
+  .comment {    
+    min-height: 20vh;
+  }
+  .comments-container{
+    width: 100%;
+  }
+  .prevNext{
+    margin-left: 0%;
+  }
+}
+@media (max-width: 600px) {
+  .comment {    
+    min-height: 30vh;
+    padding: 5%;
+  }
+  .comments-container{
+    width: 100%;
+  }
+  .publish-comment{
+    width: 100%;
+  }
+  .prevNext{
+    margin-left: 0%;
+  }
+}
+@media (min-width: 1920px) {
+  .modal-image {
+    transform: scale(3);
+    transition: transform 0.5s ease-out;
   }
 }
