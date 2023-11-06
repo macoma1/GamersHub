@@ -137,7 +137,8 @@ body {
 }
 
 .publish-comment textarea {
-  width: 40%;
+  width: 50%;
+  margin-right: 20%;
   height: 120px;
   resize: none;
   padding: 12px;

@@ -69,12 +69,13 @@
         </div>
 
         <div class="prevNext" *ngIf="comments && comments.length > 0">
-            <button (click)="loadPreviousComments()" class="btn-load-more">
-                <i class="bi bi-arrow-left"></i>
-            </button>
             <button (click)="loadMoreComments()" class="btn-load-more">
                 <i class="bi bi-arrow-right"></i>
             </button>
+            <button (click)="loadPreviousComments()" class="btn-load-more">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            
 
 
         </div>
