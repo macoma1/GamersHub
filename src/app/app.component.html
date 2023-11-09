@@ -7,7 +7,7 @@
             <button *ngIf="!isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</button>
             <button *ngIf="!isLoggedIn()" routerLink="/register" routerLinkActive="active">Register</button>
 
-            <button *ngIf="isLoggedIn()" routerLink="/profile" routerLinkActive="active">My Profile</button>
+            <button *ngIf="isLoggedIn()" routerLink="/profile" routerLinkActive="active">Profile</button>
             <button *ngIf="isLoggedIn()" (click)="logout()" routerLinkActive="active">Logout</button>
         </div>
     </nav>

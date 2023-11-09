@@ -1,6 +1,6 @@
 <div class="top-bar">
     <div class="logo-container">
-        <img src="../../logo.png" alt="Logo" class="logo">
+        <img src="../../assets/logo.png" alt="Game's HUB Logo" class="logo">
     </div>
     <div class="search-bar">
         <div class="input-group">
@@ -9,8 +9,6 @@
         </div>
     </div>
 </div>
-
-
 <div *ngIf="games.length > 0; else noGames" class="game-grid" [class.search-mode]="isSearching">
     <div *ngFor="let game of games" class="game-card" [class.search-mode]="isSearching"
         [routerLink]="['/game', game.id]">
