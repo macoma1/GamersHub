@@ -21,10 +21,12 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.http.post('http://localhost:3000/users', this.registerForm.value)
+      const apiUrl = 'https://powerful-meadow-65791.herokuapp.com/users';
+      this.http.post(apiUrl, this.registerForm.value)
         .subscribe(response => {
           this.router.navigate(['/login']);
         });
     }
   }
+
 }

@@ -13,7 +13,7 @@ export class AuthService {
   private readonly AUTH_TOKEN_KEY = 'authToken';
   private tokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(localStorage.getItem(this.AUTH_TOKEN_KEY));
   public token: Observable<string | null> = this.tokenSubject.asObservable();
-  private readonly baseUrl: string = 'https://powerful-meadow-65791.herokuapp.com';
+  private readonly baseUrl: string = 'https://powerful-meadow-65791-c0b95eb97243.herokuapp.com';
 
   constructor(private http: HttpClient, private router: Router) { }
 
