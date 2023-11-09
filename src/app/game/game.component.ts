@@ -200,8 +200,6 @@ export class GameComponent implements OnInit {
 
   removeFromFavorites(gameId: string): void {
     this.authService.removeFromFavorites(gameId).subscribe(response => {
-      console.log('Juego eliminado de favoritos con éxito.');
-
       if (this.user?.favoriteGames) {
         this.user.favoriteGames = this.user.favoriteGames.filter(favoriteGame => favoriteGame.gameId.toString() !== gameId);
       }
@@ -213,19 +211,13 @@ export class GameComponent implements OnInit {
   }
 
   addToFavorites(game: Result): void {
-    const isFavorite = this.user?.favoriteGames.some(favoriteGame => favoriteGame.gameId === game.id);
-
-    if (!isFavorite) {
       const genres = game.genres.map(genre => genre.name);
       this.authService.addToFavorites(game.id.toString(), game.name, game.background_image, genres).subscribe(response => {
         this.user?.favoriteGames.push({ gameId: game.id, name: game.name, imageUrl: game.background_image, genres: genres});
         this.favorites.add(game.id);
       }, error => {
         console.error('Error al añadir el juego a favoritos:', error);
-      });
-    } else {
-      console.log('El juego ya está en tus favoritos.');
-    }
+      });    
   }
 }
 

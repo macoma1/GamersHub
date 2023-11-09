@@ -7,7 +7,7 @@ import { Comment } from '../models/comment.model';
   providedIn: 'root'
 })
 export class CommentsService {
-  private BASE_URL = 'http://localhost:3000';
+  private BASE_URL = 'https://powerful-meadow-65791-c0b95eb97243.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 

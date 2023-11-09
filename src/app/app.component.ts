@@ -18,7 +18,6 @@ export class AppComponent {
 
   loadMoreGames() {
     if (!this.gameService.getLoadingStatus()) {
-      console.log("Loading more games");
       this.gameService.setLoadingStatus(true);
       this.gameService.emitRequestMoreGames();
 

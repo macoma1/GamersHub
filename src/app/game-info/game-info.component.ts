@@ -53,13 +53,9 @@ export class GameInfoComponent implements OnInit {
     }
 
     if (this.authService.getToken()) {
-      console.log('Token: ' + this.authService.getToken());
       this.authService.getCurrentUser().subscribe(
         user => {
           this.user = user;
-        },
-        error => {
-          console.error('Error fetching user', error);
         }
       );
     }
