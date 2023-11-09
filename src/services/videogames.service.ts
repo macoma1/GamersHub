@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GameResponse, Result, Screenshot } from '../models/videogame.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';  // Importa el operador map
+import { map } from 'rxjs/operators';
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,8 +12,8 @@ export class VideogamesService {
 
   constructor(private http: HttpClient) { }
 
-  private apiKey = '7dcf9140afc547f2992bfaa2182eb0ec';
-  private baseUrl = 'https://api.rawg.io/api/games';
+  private apiKey = environment.apiKey;
+  private baseUrl = environment.baseUrl;
   private pageSize = 24;
   private currentPage = 1;
 
@@ -34,21 +36,17 @@ export class VideogamesService {
     const url = `${this.baseUrl}/${id}?key=${this.apiKey}`;
     return this.http.get<Result>(url);
   }
-
+  
   getGameInfo(id: number): Observable<Result> {
     const url = `${this.baseUrl}/${id}?key=${this.apiKey}`;
     return this.http.get<Result>(url)
       .pipe(
         map((response: Result) => {
-          // Creamos un DOMParser para analizar el HTML
           const parser = new DOMParser();
           const doc = parser.parseFromString(response.description, 'text/html');
 
-          // Obtener todos los párrafos del documento
           const paragraphs = doc.querySelectorAll('p');
 
-          // Suponemos que el primer párrafo contiene el texto en inglés y el segundo en español
-          // Asignamos el contenido del primer párrafo a la descripción
           if (paragraphs.length > 0) {
             response.description = paragraphs[0].textContent || '';
           }
@@ -57,6 +55,7 @@ export class VideogamesService {
         })
       );
   }
+
   getComments(gameId: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(`api/endpoint/to/get/comments/${gameId}`);
   }
@@ -64,7 +63,6 @@ export class VideogamesService {
   addComment(comment: Comment): Observable<Comment> {
     return this.http.post<Comment>('api/endpoint/to/add/comment', comment);
   }
-  // En VideogamesService
 
   getScreenshots(gameId: number): Observable<Screenshot[]> {
     const url = `${this.baseUrl}/${gameId}/screenshots?key=${this.apiKey}`;

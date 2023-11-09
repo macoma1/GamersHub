@@ -14,7 +14,7 @@ export class InfiniteScrollDirective {
     const scrollPosition = target.scrollTop;
     const viewportHeight = target.clientHeight;
 
-    if (scrollPosition + viewportHeight >= totalScrollHeight - 50) {
+    if (scrollPosition + viewportHeight >= totalScrollHeight - 600) {
       this.scrollToEnd.emit();
     }
   }

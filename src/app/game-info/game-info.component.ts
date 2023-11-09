@@ -40,7 +40,6 @@ export class GameInfoComponent implements OnInit {
     if (gameId) {
       this.videogamesService.getGameInfo(+gameId).subscribe(response => {
         this.game = response;
-        // Now get the screenshots once you have the game info
         this.videogamesService.getScreenshots(+gameId).subscribe(screenshots => {
           if (this.game) {
             this.game.screenshots = screenshots;
@@ -88,11 +87,11 @@ export class GameInfoComponent implements OnInit {
     if (gameId) {
       this.commentsService.getComments(+gameId).subscribe(comments => {
         this.comments = comments.sort((a, b) => {
-          const dateA = a.date ? new Date(a.date).getTime() : 0; // Fallback to 0 if 'a.date' is undefined
-          const dateB = b.date ? new Date(b.date).getTime() : 0; // Fallback to 0 if 'b.date' is undefined
-          return dateB - dateA; // Sort in descending order
+          const dateA = a.date ? new Date(a.date).getTime() : 0;
+          const dateB = b.date ? new Date(b.date).getTime() : 0;
+          return dateB - dateA;
         });
-        this.displayComments();  // This will take care of displaying only the first 3 comments
+        this.displayComments();
       });
     }
   }
@@ -100,7 +99,6 @@ export class GameInfoComponent implements OnInit {
   displayComments(): void {
     const start = (this.commentPage - 1) * this.commentsPerPage;
     let end = start + this.commentsPerPage;
-    const maxPages = Math.ceil(this.comments.length / this.commentsPerPage);
     this.displayedComments = this.comments.slice(start, end);
     while (this.displayedComments.length < this.commentsPerPage) {
       this.displayedComments.push(this.createPlaceholderComment());
@@ -111,13 +109,11 @@ export class GameInfoComponent implements OnInit {
     return {
       email: '',
       userName: '',
-      gameId: this.game ? this.game.id : 0, // Suponiendo que un gameId de 0 es inválido.
+      gameId: this.game ? this.game.id : 0,
       content: '',
-      date: new Date, // Agregar fecha como null o dejar sin inicializar si es opcional
+      date: new Date,
     };
   }
-
-
 
   loadMoreComments(): void {
     const maxPages = Math.ceil(this.comments.length / this.commentsPerPage);

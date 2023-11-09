@@ -6,14 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '../app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from '../home/home.component';
+import { ProfileComponent  } from '../profile/profile.component';
 import { InfiniteScrollDirective } from '../InfiniteScrollDirective';
 import { GameInfoComponent } from '../game-info/game-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    ProfileComponent,
     InfiniteScrollDirective,
     GameInfoComponent,
 

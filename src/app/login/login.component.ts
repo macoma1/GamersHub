@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth-service.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  loginFailed: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,16 +26,18 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
+    this.loginFailed = false;
     this.authService.login(this.loginForm.value).subscribe(
-        (response: any) => {
-            localStorage.setItem('authToken', response.token);
-            this.router.navigate(['/home']);
-        },
-        (error: any) => {
-            console.error('Error en el inicio de sesión:', error);
-        }
+      (response: any) => {
+        localStorage.setItem('authToken', response.token);
+        this.router.navigate(['/profile']);
+      },
+      (error: any) => {
+        console.error('Error en el inicio de sesión:', error);
+        this.loginFailed = true;
+      }
     );
-}
+  }
 
 
 }

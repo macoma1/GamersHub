@@ -34,7 +34,7 @@ body {
 .page-btn {
   padding: 10px 20px;
   margin: 0 10px;
-  background-color: #4caf50; /* Color de fondo de tu botón */
+  background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
@@ -42,7 +42,7 @@ body {
 }
 
 .page-btn:hover {
-  background-color: #45a049; /* Color de fondo al pasar el ratón por encima */
+  background-color: #45a049;
 }
 
 .page-info {
@@ -66,7 +66,7 @@ body {
 }
 
 .game-card {
-  height: 550px; /* Reducido de 690px a 550px */
+  height: 550px;
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -157,7 +157,7 @@ body {
   display: flex;
   align-items: center;
   max-width: 400px;
-  margin: 10px 0; /* Margen superior e inferior para un mejor espaciado */
+  margin: 10px 0;
 }
 
 input[type="text"] {
@@ -167,8 +167,8 @@ input[type="text"] {
   color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 16px; /* Un tamaño de fuente ligeramente más grande para mejor legibilidad */
-  background-color: transparent; /* Asegura que el input tenga el mismo fondo que la barra de búsqueda */
+  font-size: 16px;
+  background-color: transparent;
 }
 
 button {
@@ -180,12 +180,12 @@ button {
 }
 
 button:hover {
-  background-color: #34495e; /* Un tono ligeramente más oscuro para el hover */
+  background-color: #34495e;
 }
 
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Default: 5 juegos por fila */
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   padding: 20px;
 }
@@ -207,28 +207,24 @@ button:hover {
   }
 }
 
-/* Cambia a 4 juegos por fila cuando la ventana es menor a 1200px */
 @media screen and (max-width: 1200px) {
   .game-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Cambia a 3 juegos por fila cuando la ventana es menor a 900px */
 @media screen and (max-width: 900px) {
   .game-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Cambia a 2 juegos por fila cuando la ventana es menor a 600px */
 @media screen and (max-width: 600px) {
   .game-grid {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
-/* Cambia a 1 juego por fila cuando la ventana es menor a 450px */
 @media screen and (max-width: 450px) {
   .game-grid {
     grid-template-columns: repeat(1, 1fr);
@@ -237,14 +233,14 @@ button:hover {
 
 .favorite-btn {
   position: absolute;
-  top: 10px; /* Distancia desde la parte superior del game-card */
-  right: 10px; /* Distancia desde la parte derecha del game-card */
+  top: 10px;
+  right: 10px;
   background-color: rgba(
     0,
     0,
     0,
     0.6
-  ); /* Fondo semi-transparente para mejorar la visibilidad del botón */
+  );
   color: white;
   border: none;
   padding: 5px 10px;

@@ -6,7 +6,9 @@ export interface User {
   profilePicture?: string;
   favoriteGames: {
     gameId: number,
-    imageUrl: string
+    name: string,
+    imageUrl: string,
+    genres: string[];
   }[];
 
 }

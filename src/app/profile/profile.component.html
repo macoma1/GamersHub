@@ -1,0 +1,37 @@
+<div class="container">
+    <div *ngIf="isLoading">
+        <p>Loading user data...</p>
+    </div>
+
+    <div class="main" *ngIf="user && !isLoading">
+        <h1>Welcome, {{ user.name }}!</h1>
+        <h2>Your Favorite Games</h2>
+
+        <div class="genre-buttons btn-group" role="group" aria-label="Genre Buttons">
+            <button (click)="selectGenre('all')" [class.active]="selectedGenre === 'all'" class="btn btn-primary">All
+                Genres</button>
+            <button *ngFor="let genre of genres" (click)="selectGenre(genre)" [class.active]="selectedGenre === genre"
+                class="btn btn-secondary">{{ genre }}</button>
+        </div>
+        <div class="search-bar">
+            <div class="input-group">
+                <input type="text" [(ngModel)]="searchText" placeholder="Search games..." class="form-control">
+            </div>
+        </div>
+
+        <div *ngIf="user?.favoriteGames?.length" class="game-list row mt-4">
+            <div *ngFor="let game of getFilteredGames()" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <a [routerLink]="['/game', game.gameId]">
+                    <img [src]="game.imageUrl" alt="{{ game.name }}" class="img-fluid">
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="error" class="loading-error-section">
+        <p>There was an error fetching the user data.</p>
+    </div>
+
+    <ng-template #loadingTemplate class="loading-section"></ng-template>
+</div>

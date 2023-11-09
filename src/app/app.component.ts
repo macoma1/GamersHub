@@ -1,23 +1,22 @@
 import { Component } from '@angular/core';
 import { GameService } from '../services/game.service';
 import { Router } from '@angular/router';
-
+import { AuthService } from 'src/services/auth-service.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
+
   title = 'AngularFront';
-  constructor(private gameService: GameService, private router: Router) {}
+  constructor(private gameService: GameService, private router: Router, private authService: AuthService) { }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('authToken');
   }
 
   loadMoreGames() {
-    // Solo emite la solicitud si no hay una en curso
     if (!this.gameService.getLoadingStatus()) {
       console.log("Loading more games");
       this.gameService.setLoadingStatus(true);
@@ -27,7 +26,9 @@ export class AppComponent {
   }
 
   logout(): void {
-    localStorage.removeItem('authToken');
-    this.router.navigate(['/']);
+    this.authService.logout();
+    this.router.navigateByUrl('/').then(() => {
+      window.location.reload();
+    });
   }
 }

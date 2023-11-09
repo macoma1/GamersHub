@@ -7,17 +7,17 @@ body {
 
 .game-container {
   width: 80%;
-  margin: 2.5vh auto; /* Ajustado a vh para un espaciado relativo */
-  padding: 1.25vw; /* Ajustado a vw para mantener el espaciado proporcional */
+  margin: 2.5vh auto;
+  padding: 1.25vw;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-size: cover;
   background-position: center top;
   color: white;
-  text-shadow: 0.1vw 0.1vw 0.2vw #000000; /* Ajustado a vw para sombras de texto proporcionales */
+  text-shadow: 0.1vw 0.1vw 0.2vw #000000;
   position: relative;
-  box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.1); /* Ajustado a vw para sombras proporcionales */
+  box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.1);
 }
 
 .game-container::after {
@@ -44,7 +44,6 @@ body {
   z-index: 2;
 }
 
-/* Comments Section */
 .comment-section {
   margin-top: 30px;
 }
@@ -55,7 +54,7 @@ body {
     255,
     255,
     0.3
-  ); /* Lighter and semitransparent background */
+  );
   color: #fff;
   padding: 3%;
   border-radius: 5px;
@@ -65,8 +64,8 @@ body {
   overflow-wrap: break-word;
   width: 100%;
   min-height: 15vh;
-  position: relative; /* For positioning the date */
-  font-family: "Arial", sans-serif; /* Changed font */
+  position: relative;
+  font-family: "Arial", sans-serif;
   height: auto;
   max-height: 15vh;
   overflow: hidden;
@@ -78,14 +77,14 @@ body {
 .comments-container::after {
   content: "";
   display: block;
-  padding-bottom: 33.33%; /* Esto mantendrá la relación de aspecto si decides no usar aspect-ratio */
+  padding-bottom: 33.33%;
 }
 
 @media (max-width: 768px) {
   .comments-container {
-    width: 95%; /* Ajuste para pantallas más pequeñas */
+    width: 95%;
     padding: 10px;
-    aspect-ratio: auto; /* O puedes cambiar la relación de aspecto para dispositivos móviles si es necesario */
+    aspect-ratio: auto;
   }
 }
 .comment:hover {
@@ -93,30 +92,28 @@ body {
 }
 
 .comment p {
-  margin-top: 4px; /* Reduced space above the content */
-  font-size: 1em; /* Slightly bigger text for content */
+  margin-top: 4px;
+  font-size: 1em;
 }
 
 .comment small {
   position: absolute;
   right: 15px;
-  bottom: 10px; /* Positioned at the bottom right */
-  font-size: 0.8em; /* Smaller font size for the date */
-  color: #fff; /* Darker grey to stand out from the background */
+  bottom: 10px;
+  font-size: 0.8em;
+  color: #fff;
 }
 
-/* Encabezado de la sección de comentarios */
 .comment-section-title {
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #555; /* Darker grey color for the title */
-  background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent background */
+  color: #555;
+  background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 5px;
 }
 
-/* Botón de publicación */
 .publish-comment button {
   background-color: #007bff;
   color: white;
@@ -193,72 +190,70 @@ body {
   border: none;
 }
 
-/* Change color on hover */
+
 .btn-delete:hover {
   color: red;
 }
 .screenshotsDiv {
   overflow: hidden;
 }
-/* Bootstrap icon adjustments */
+
 .bi-trash {
-  font-size: 1.25rem; /* Adjust size as needed */
+  font-size: 1.25rem;
 }
 
-/* Adjust the top-right position as needed */
 .comment .btn-delete {
   top: 10px;
   right: 10px;
 }
 .btn-load-more {
   background-color: transparent;
-  color: white; /* O el color que desees */
+  color: white;
   border: none;
   font-size: 2em;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   cursor: pointer;
   transition: color 0.3s ease-in-out;
-  float: right; /* Alinea el botón a la derecha */
+  float: right;
 }
 
 
 .loading-placeholder {
-  height: 160px; /* Altura de los screenshots */
-  background-color: transparent; /* Un color de fo;ndo para el placeholder */
-  border-radius: 4px; /* Si quieres bordes redondeados para el placeholder */
-  margin-bottom: 15px; /* Mantener consistencia en el espaciado */
-  animation: pulse 1.5s infinite ease-in-out; /* Una pequeña animación de pulso */
+  height: 160px;
+  background-color: transparent;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  animation: pulse 1.5s infinite ease-in-out;
 }
 .screenshot-container {
   display: flex;
-  flex-wrap: nowrap; /* Asegúrate de que las imágenes se mantengan en una fila */
-  overflow-x: auto; /* Habilita el desplazamiento horizontal */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  margin: 0 -15px; /* Ajustar según tu diseño */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin: 0 -15px;
 }
 
 .screenshot-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari y Opera */
+  display: none;
 }
 
 .img-thumbnail {
-  flex: 0 0 auto; /* Esto asegura que las imágenes no se estiren o encogen */
-  margin-right: 15px; /* Espaciado entre imágenes */
-  min-width: 300px; /* Tamaño mínimo para las imágenes */
-  width: auto; /* Esto asegura que las imágenes conserven su tamaño original si es mayor a 300px */
-  height: auto; /* Esto asegura que la altura de la imagen se ajuste proporcionalmente */
+  flex: 0 0 auto;
+  margin-right: 15px;
+  min-width: 300px;
+  width: auto;
+  height: auto;
 }
 
-/* Estilo para ocultar la barra de desplazamiento pero permitir el scroll */
 .screenshot-container::-webkit-scrollbar {
-  display: none; /* Para navegadores webkit como Chrome y Safari */
+  display: none;
 }
 
 .screenshot-container {
-  -ms-overflow-style: none; /* Para Internet Explorer y Edge */
-  scrollbar-width: none; /* Para Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @keyframes fadeInImage {
@@ -290,8 +285,8 @@ body {
   }
 
   .screenshot-thumbnail {
-    min-width: 120px; /* Tamaño más pequeño para pantallas más estrechas */
-    margin-right: 10px; /* Espaciado menor entre imágenes */
+    min-width: 120px;
+    margin-right: 10px;
   }
 }
 @media (max-width: 1300px) {
@@ -339,3 +334,5 @@ body {
     transition: transform 0.5s ease-out;
   }
 }
+
+

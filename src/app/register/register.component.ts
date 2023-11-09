@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -22,11 +23,8 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.http.post('http://localhost:3000/users', this.registerForm.value)
         .subscribe(response => {
-          // Maneja la respuesta aquí, por ejemplo redirigir al usuario a la página de inicio
-        }, error => {
-          // Maneja los errores aquí, por ejemplo mostrar un mensaje al usuario
+          this.router.navigate(['/login']);
         });
-        console.log(this.registerForm.value);
     }
   }
 }
