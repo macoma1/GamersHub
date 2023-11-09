@@ -21,6 +21,7 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      alert("hola");
       const apiUrl = 'https://powerful-meadow-65791-c0b95eb97243.herokuapp.com/users';
       this.http.post(apiUrl, this.registerForm.value)
         .subscribe(response => {
